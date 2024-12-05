@@ -1,0 +1,5 @@
+2024-12-05T09:35:08.856+08:00  WARN 19472 --- [springboot-ssr-financeweb] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16h39m46s485ms985µs600ns).
+2024-12-05T10:08:48.154+08:00  INFO 19472 --- [springboot-ssr-financeweb] [RMI TCP Connection(418)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-12-05T10:08:48.217+08:00  INFO 19472 --- [springboot-ssr-financeweb] [RMI TCP Connection(418)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-05T10:08:48.230+08:00  INFO 19472 --- [springboot-ssr-financeweb] [RMI TCP Connection(418)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-05T10:08:48.235+08:00  INFO 19472 --- [springboot-ssr-financeweb] [RMI TCP Connection(418)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

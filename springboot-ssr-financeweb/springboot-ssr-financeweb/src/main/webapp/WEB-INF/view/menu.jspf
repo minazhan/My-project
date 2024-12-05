@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+ <style>
+    /* 修改按鈕顏色 */
+    .button-lightblue {
+        background-color: rgba(90, 132, 195, 1); /* 設定背景顏色 */
+        color: #ffffff; /* 設定文字顏色，使用白色以增加可讀性 */
+        border: none; /* 移除邊框 */
+        padding: 10px 20px; /* 調整內邊距 */
+        border-radius: 5px; /* 添加圓角 */
+        text-decoration: none; /* 去掉連結的下劃線 */
+    }
+
+    /* 當滑鼠懸停在按鈕上時的效果 */
+    .button-secondary:hover {
+        background-color: rgba(70, 112, 175, 1); /* 調整顏色變暗一些 */
+        color: #ffffff; /* 保持文字顏色為白色 */
+    }
+</style>
+    
+<div style="background-color: #dddddd;">
+	<div style="padding: 10px">
+		<a href="/login" class="button-lightblue pure-button" >Login</a>
+		<a href="/users" class="button-lightblue pure-button" >用戶管理</a>
+		<a href="/report" class="button-lightblue pure-button" >資料圖表報告</a>
+		<!-- logout點擊重導到 成功登出會有其他按鈕供選擇 -->
+		<a href="/logout" class="button-lightblue pure-button" style="float: right;">
+			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+			<path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+			</svg>
+		</a>
+		<a href="/products" class="button-lightblue pure-button" >Product 列表</a>
+	</div>
+</div>
