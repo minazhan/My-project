@@ -1,0 +1,247 @@
+<!-- 子頁面應該有一個唯一的容器類名，以便主頁面通過 JavaScript 查找到它，並執行相應的初始化函數 -->
+<div class="transaction-container">
+    <!-- 引入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- 引入 Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 引入 DataTables 的 CSS 和 JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.jqueryui.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.jqueryui.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    
+    <!-- 引入 Bootstrap Datepicker -->
+    <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        .container-fluid{
+            max-width: 900px;
+            height: auto;
+            margin: 0 auto;
+            padding: 0px;
+            flex: 1;
+        }
+
+        .content-page{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .input-group{
+            width: 50%; 
+            margin: 0 auto;  
+            gap: 30px;
+        } 
+
+
+        .chart-table-container{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* 避免垂直置中導致空間浪費 */
+            gap: 50px; /* 增加兩塊之間的間距 */
+            margin: 0 auto; /* 居中整個容器 */
+            max-width: 1200px; /* 設置最大寬度，控制整體布局 */
+            padding: 5px; /* 增加內邊距，避免貼邊 */
+            flex: 1;
+        }
+
+        .chart-container {
+            flex: 0 0 40%; /* 左側區塊佔用 40% 的寬度 */
+            max-width: 40%; /* 保持與 flex 相同 */
+            height: 300px; /* 固定高度 */
+        }
+        .table-responsive-sm {
+            flex: 1; /* 讓表格區塊佔用剩餘空間 */
+            max-width: 60%; /* 保證寬度不超過 60% */
+            overflow-y: auto; /* 表格可以垂直滾動 */
+        }
+
+        /* 小於 768px 時，將 chart 和 table 垂直排列 */
+        @media (max-width: 768px) {
+            .chart-table-container {
+                flex-direction: column; /* 垂直排列 */
+                align-items: center;    /* 垂直居中對齊 */
+            }
+            
+            .chart-container,
+            .table-responsive-sm {
+                max-width: 100%; /* 讓兩個區塊的寬度都占滿屏幕 */
+                margin: 10px 0;  /* 增加垂直間距 */
+                /* text-align: center; */
+            }
+        }
+
+        #detailsTable {
+            font-family: Arial, sans-serif;  /* 修改字體 */
+            font-size: 14px;                 /* 修改字型大小 */
+            border-collapse: collapse;       /* 去除表格的內邊距 */
+            width: 100%;                     /* 表格寬度 */
+        }
+
+        /* 修改表頭樣式 */
+        #detailsTable thead {
+            background-color: #f0f8ff;       /* 設定表頭背景顏色 */
+            color: #333;                     /* 設定表頭文字顏色 */
+            font-weight: bold;               /* 表頭文字加粗 */
+            text-align: center;              /* 表頭文字居中 */
+        }
+
+        #detailsTable th, #detailsTable td {
+            /*vertical-align: top;   文字平行排列在單元格的頂端 */
+            text-align: left;      /*文字水平靠左對齊（可根據需要調整） */
+            padding: 10px;        /* 單元格的內邊距 */
+            border: 1px solid #ddd; /* 單元格的邊框顏色 */
+            min-width: 60px;  /* 設置單元格最小寬度 */
+        }
+
+        #detailsTable td{
+            text-align: center;      /*文字水平靠左對齊（可根據需要調整） */
+            padding: 10px;        /* 單元格的內邊距 */
+            border: 1px solid #ddd; /* 單元格的邊框顏色 */
+        }
+
+        /* 奇偶行顏色交替 */
+        #detailsTable tbody tr:nth-child(even) {
+            background-color: #f9f9f9;       /* 偶數行的背景顏色 */
+        }
+
+        #detailsTable tbody tr:nth-child(odd) {
+            background-color: #ffffff;       /* 奇數行的背景顏色 */
+        }
+
+        #detailsTable th:nth-child(3), #detailsTable td:nth-child(3) {
+            width: 100px;  /* 設置第二列的寬度為 80px */
+        }
+
+        .dt-paging-button {
+            font-size: 12px;  /* 調整按鈕中文字的大小 */
+            padding: 10px 10px; /* 調整按鈕的內邊距，讓按鈕變小 */
+            border-radius: 4px; /* 圓角化按鈕邊框 */
+        }
+
+        .add-button button {
+            width: 50px; /* 增加按鈕寬度 */
+            height: 50px; /* 增加按鈕高度 */
+            border-radius: 50%; /* 保持圓形 */
+            background-color:#ffe6e6; /* 背景顏色 */
+            /* color: white; */
+            font-size: 36px; /* 加號大小 */
+            border: none; /* 去掉邊框 */
+            /* cursor: pointer; */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加陰影效果 */
+            display: flex;
+            align-items: center; /* 垂直置中 */
+            justify-content: center; /* 水平置中 */
+            /* padding: 0; */
+        }
+
+        .add-button svg {
+            fill: #3e417d; /* 更改svg顏色 */
+        }
+
+
+        .add-button button:hover{
+            background-color:#3e417d;
+        }
+
+        .add-button button:hover svg {
+            fill: #ffe6e6;
+        }
+
+        #content1 input,
+        #content1 select,
+        #content1 button
+         {
+            height: 40px;  /* 統一高度 */
+            padding: 5px;  /* 調整內邊距 */
+            font-size: 16px; /* 統一字體大小 */
+            box-sizing: border-box; /* 確保 padding 不會影響元素總寬度 */
+        }
+
+        /* #submitEntryBtn
+        {
+
+        } */
+
+    </style>
+
+
+
+
+    <!-- 支出/收入 -->
+    <div class="container-fluid">
+        <div class="content-page">
+            <!-- 按扭區 -->
+            <div class="button-container mt-3" style="text-align: center;">
+                <button id="monthBtn" class="btn btn-primary">月</button>
+                <button id="sixMonthsBtn" class="btn btn-primary">近6月</button>
+                <button id="yearBtn" class="btn btn-primary">年</button>
+            </div>                
+            <!-- 日期選擇器 -->
+            <div class="container">
+                <div class="input-group date mt-3" id="datepicker">
+                    
+                    <!-- 開始日期（自動計算並顯示） -->
+                    <input id="startDate" type="text" class="form-control mt-2" placeholder="開始日期" readonly style="display: none;">
+                    <input id="endDate" type="text" class="form-control mt-2" placeholder="選擇日期">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                </div>
+            </div> 
+            <div class="chart-table-container mt-4">
+                <div class="chart-container" style="width: 50%; margin: 0 auto;">
+                    <canvas id="donutChart" style="width: 100%; height: auto;"></canvas>
+                </div>
+
+                <div class="table-responsive-sm mt-4" style="max-height: 200px; overflow-y: auto;">
+                    <table id="detailsTable" class="display" style="width:100%">
+                        <thead scope="col" class="sticky-header"
+                            style="text-align: center; background-color: aliceblue;">
+                            <tr>
+                                <th>分類</th>
+                                <th>類型</th>
+                                <th>日期</th>
+                                <th>金額</th>
+                                <th>刪除</th>
+                            </tr>
+                        </thead>
+						<!-- 用於將後端資料插入 -->
+                        <tbody id="transactionTableBody"></tbody>
+                    </table>
+                </div> 
+            </div>
+
+            <div id="content1" style="flex-direction: column;"></div>
+            <!-- 新增按鈕 style="position: fixed; bottom: 50px; right: 50px;"-->
+            <div class="add-button" style="margin-top: 20px;"> <!--與表單保持距離-->
+                <button id="addEntryBtn" title="新增收入/支出" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#5f6368">
+                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+   
+
+    <!-- 初始化 DataTable -->
+    <!-- <script type="text/javascript">
+
+
+    </script> -->
+
+</div> 

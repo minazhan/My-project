@@ -1,0 +1,143 @@
+<div class="summary-container">
+        <!-- 引入 jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+        <!-- 引入 Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- 引入 DataTables 的 CSS 和 JS -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.jqueryui.css">
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.jqueryui.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+        
+        <!-- 引入 Bootstrap Datepicker -->
+        <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+    
+        <!-- 引入 Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <style>
+
+        .container-fluid{
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0px;
+            height: auto;
+        }
+
+
+        .content-page{
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .chart-table-container{
+            margin: 0 auto; /* 居中整個容器 */
+            padding: 10px; /* 增加內邊距，避免貼邊 */
+        }
+
+        /* .chart-container { */
+            /* max-width: 50%; */
+            /*margin: 0 auto;  確保圖表居中 */
+        /* } */
+
+        #detailsTable {
+            font-family: Arial, sans-serif;  /* 修改字體 */
+            font-size: 14px;                 /* 修改字型大小 */
+            border-collapse: collapse;       /* 去除表格的內邊距 */
+            width: 100%;                     /* 表格寬度 */
+        }
+
+        /* 修改表頭樣式 */
+        #detailsTable thead {
+            background-color: #f0f8ff;       /* 設定表頭背景顏色 */
+            color: #333;                     /* 設定表頭文字顏色 */
+            font-weight: bold;               /* 表頭文字加粗 */
+            text-align: center;              /* 表頭文字居中 */
+        }
+
+        #detailsTable th, #detailsTable td {
+            /*vertical-align: top;   文字平行排列在單元格的頂端 */
+            text-align: center;      /*文字水平靠左對齊（可根據需要調整） */
+            padding: 10px;        /* 單元格的內邊距 */
+            border: 1px solid #ddd; /* 單元格的邊框顏色 */
+            min-width: 60px;  /* 設置單元格最小寬度 */
+        }
+
+        /* 奇偶行顏色交替 */
+        #detailsTable tbody tr:nth-child(even) {
+            background-color: #f9f9f9;       /* 偶數行的背景顏色 */
+        }
+
+        #detailsTable tbody tr:nth-child(odd) {
+            background-color: #ffffff;       /* 奇數行的背景顏色 */
+        }
+
+
+        .dt-paging-button {
+            font-size: 12px;  /* 調整按鈕中文字的大小 */
+            padding: 10px 10px; /* 調整按鈕的內邊距，讓按鈕變小 */
+            border-radius: 4px; /* 圓角化按鈕邊框 */
+        }
+
+        .table-responsive-sm {
+            max-width: 50%;  /*限制表格最大寬度 */
+            margin: 0 auto; /* 表格置中 */
+            overflow-y: auto;
+            max-height: 200px; /* 限制表格高度 */
+        }
+
+        @media (max-width: 768px) {
+            .chart-container, .table-responsive-sm {
+                max-width: 50%;
+            }
+        }
+
+        /* #yearBtn{
+            min-width: 60px;
+        } */
+
+        #selectDateInput {
+        	text-align: center; /* 文字水平置中 */
+		}
+
+        </style>
+        
+    <div class="container-fluid">
+        <div class="content-page">
+            <!-- 按扭區 -->
+            <!-- <div class="button-container mt-3" style="text-align: center;">
+                <button id="yearBtn" class="btn btn-primary">年</button>
+            </div> -->
+            <!-- 日期選擇器 -->
+            <div class="container" style="width: 50%; ">
+                <div class="input-group date mt-3" id="datepicker">
+                    <input id="selectDateInput" type="text" class="form-control mt-2" placeholder="選擇年份"> <!-- 此id會對應JavaScript 初始化日期選擇器 -->
+                </div>
+            </div>
+            <!-- Line Chart -->
+            <div class="chart-table-container mt-4">
+                <div class="chart-container" style="width: 50%; margin: 0 auto;">
+                    <canvas id="lineChart" style="width: 100%; height: auto;"></canvas>
+                </div>
+
+                <div class="table-responsive-sm mt-4">
+                    <table id="detailsTable" class="display" style="width:100%">
+                        <thead scope="col" class="sticky-header"
+                            style="text-align: center; background-color: aliceblue;">
+                            <tr>
+                                <th>日期</th>
+                                <th>金額</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

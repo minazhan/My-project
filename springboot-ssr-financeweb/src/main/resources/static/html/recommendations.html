@@ -1,0 +1,196 @@
+<div class="recommendations-container">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container{
+            padding: 10px;
+            width: 70%;
+            margin: 0,auto;
+        }
+
+        h4{
+            text-align: center;
+        }
+
+        .detailBtn{
+            text-align: center;
+        }
+
+                /* 小於 768px 時，將 chart 和 table 垂直排列 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* 垂直排列 */
+                align-items: center;    /* 垂直居中對齊 */
+            }
+            
+            .container{
+                max-width: 100%; /* 讓兩個區塊的寬度都占滿屏幕 */
+                margin: 10px 0;  /* 增加垂直間距 */
+                /* text-align: center; */
+            }
+        }
+
+
+    </style>
+    
+    </head>
+    <body>
+        <div class="container mt-3">
+            <h3>當月投資推薦TOP3</h3>
+            <!-- 股票 -->
+            <div class="row">
+                <h4>股票-</h4>
+                <!-- 第一張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/A" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/B" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第三張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/C" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 基金 -->
+            <div class="row">
+                <h4>基金-</h4>
+                <!-- 第一張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/A" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/B" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第三張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/C" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 期貨 -->
+            <div class="row">
+                <h4>期貨-</h4>
+                <!-- 第一張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/A" class="btn btn-primary">詳細資料</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/B" class="btn btn-primary">詳細資料</a>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <!-- 第三張卡片 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">xx商品</h5>
+                            <p class="card-text">
+                                成交:<br>
+                                最高:<br>
+                                最低:<br>
+                            </p>
+                            <div class="detailBtn">
+                                <a href="/product/details/C" class="btn btn-primary">詳細資料</a>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
