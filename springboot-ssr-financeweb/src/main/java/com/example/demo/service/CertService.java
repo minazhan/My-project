@@ -29,7 +29,7 @@ public class CertService {
             	throw new RuntimeException("密碼不正確，驗證失敗");
             }
             // 3. 簽發憑證
-            UserCert userCert=new UserCert(user.getUserId(), user.getEmail(),user.getFirstName());
+            UserCert userCert=new UserCert(user.getUserId(), user.getEmail(),user.getFirstName(),user.getRole());
             return userCert;
         }else {
             // 找不到使用者時，應該丟出一個例外或者返回 null

@@ -39,10 +39,15 @@ public class RegisterController {
     	    });
     	    return "register";
     	}
-    	
+
     	//會取決於UserService方法有無回傳值，如果是void就不能使用
     	User user = userService.addRegistrationUser(userRegistrationDto);
     	System.out.println("userId: " + user.getUserId());
+    	
+    	//如果role為ADMIN，則直接跳轉到登入頁面
+    	if ("ADMIN".equals(userRegistrationDto.getRole())) {
+    		return "redirect:/login";
+		}
     	return "redirect:/form?userId=" + user.getUserId(); // 註冊成功後可以導向表單頁面或其他頁面
     }
     

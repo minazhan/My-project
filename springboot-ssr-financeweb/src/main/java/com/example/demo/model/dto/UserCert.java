@@ -6,13 +6,19 @@ public class UserCert {
 	private Integer userId; // 使用者ID
 	private String email; // 使用者email
 	private String firstName; //使用者名稱
+	private String role; //角色權限
 
 	
-	public UserCert(Integer userId, String email,String firstName) {
+	public UserCert(Integer userId, String email,String firstName,String role) {
 		this.userId = userId;
 		this.email = email;
 		this.firstName = firstName;
+		this.role=role;
 
+	}
+
+	public String getRole() {
+		return role;
 	}
 
 	public Integer getUserId() {
@@ -29,7 +35,7 @@ public class UserCert {
 
 	@Override
 	public String toString() {
-		return "UserCert [userId=" + userId + ", email=" + email + ", firstName=" + firstName + "]";
+		return "UserCert [userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", role=" + role + "]";
 	}
 
 	

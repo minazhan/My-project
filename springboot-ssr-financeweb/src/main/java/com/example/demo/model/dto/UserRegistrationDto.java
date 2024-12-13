@@ -49,4 +49,7 @@ public class UserRegistrationDto { //包含敏感信息，用於接收前端傳�
 		
 		@NotBlank(message = "{userRegistrationDto.email.notNull}")
 		private String email;//電子郵件
+		
+		@NotBlank(message = "{userRegistrationDto.role.notNull}")
+		private String role;//角色權限
 }

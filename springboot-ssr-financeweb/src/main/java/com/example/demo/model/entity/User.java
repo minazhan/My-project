@@ -63,5 +63,8 @@ public class User {
 		
 		@Column(name = "email", unique = true)
 		private String email;//電子郵件
+		
+		@Column(name = "role")
+		private String role;//角色權限
 
 }

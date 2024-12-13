@@ -33,7 +33,7 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		background-color: #cad6e9;
+		background-color: #3e417d;
 		color: #fff;
 		padding: 15px 20px;
 		display: flex;
@@ -41,6 +41,10 @@
 		align-items: center;
 		z-index: 1000; /* 確保 navbar 在最上層 */
 	}
+	
+	    .navbar-brand{
+        color:#ffe6e6;
+    }
 	
 	html, body {
 		height: 100%;
@@ -129,7 +133,7 @@
 
 	<div class="container-fluid">
 		<nav class="navbar">
-			<a class="navbar-brand" href="#">XX理財</a>
+			<a class="navbar-brand" href="/">發發理財</a>
 		</nav>
 		
 

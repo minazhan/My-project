@@ -24,6 +24,25 @@
 		    <!-- 引入 DataTables 的 CSS -->
 		    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.tailwindcss.css">
 		
+		<style>
+		
+			.container {
+    max-width: 100%; /* 確保容器不會超出瀏覽器視窗寬度 */
+    overflow-x: auto; /* 超出容器時允許滾動 */
+}
+
+table {
+    width: 100%; /* 自適應容器寬度 */
+    word-wrap: break-word; /* 讓文字在單元格內換行 */
+    table-layout: auto; /* 自動調整每欄的寬度 */
+}
+
+
+		
+		
+		</style>
+		
+		
 	</head>
 	<body>
 			<!-- menu bar include -->

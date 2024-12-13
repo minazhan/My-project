@@ -30,6 +30,11 @@
 
 
 <body>
+
+	<%-- 從 Session 中獲取角色並設置到 JSP 變數 --%>
+    <c:set var="role" value="${sessionScope.role}" />
+    <c:set var="firstName" value="${sessionScope.firstName}" />
+    
     <!-- 加載 Bootstrap 的 JavaScript 功能 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
@@ -44,7 +49,11 @@
     <!-- <nav> 元素包含了一個類別 class="navbar navbar-expand-lg navbar-light fixed-top"，這表示這是一個導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid"> <!--  Bootstrap 提供的一個類別，始終佔據視窗的全部寬度，無論螢幕大小 -->
-            <a class="navbar-brand" href="#">XX理財</a>
+            <a class="navbar-brand" href="/">發發理財</a>
+            <!-- 只有當 firstName 存在時顯示歡迎信息 -->
+    		<c:if test="${sessionScope.firstName != null}">
+            	<p>歡迎, ${sessionScope.firstName}！</p>
+            </c:if>
 
             <!-- 漢堡按鈕，控制 Offcanvas，適用於小螢幕 -->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -83,10 +92,16 @@
                         <a class="nav-link" href="#">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">個人頁面</a>
+                    	<c:if test="${role == 'USER'}">
+                        	<a class="nav-link" href="/index.html">個人頁面</a>
+                        	<!-- <button onclick="window.location. href="/index.html">個人頁面</button> -->
+                        </c:if>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/users">後臺登入</a>
+                    	<c:if test="${role == 'ADMIN'}">
+                        	<a class="nav-link" href="/admin/users">後臺登入</a>
+                        	<!--  <button onclick="window.location. href="/admin/users">後臺登入</button>-->
+                        </c:if>
                     </li>
                 </ul>
                
@@ -98,10 +113,10 @@
 
     <!-- 導覽列下方的圖片 -->
     <div class="container-fluid p-0 position-relative" style="text-align: center;">
-        <img src="<c:url value='/img/bg16.jpg' />" class="full-width-image" alt="...">
+        <img src="<c:url value='/img/pig_6.jpg' />" class="full-width-image" alt="...">
 
         <!-- 疊加在圖片上的文字 -->
-        <div class="overlay-content position-absolute w-100" style="top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;">
+        <div class="overlay-content position-absolute w-100" style="top: 50%; left: 50%; transform: translate(-50%, -50%); color: 3e417d;">
             <h2>圖片上文字描述</h2>
             <!-- mt-3讓按鈕和標題之間保持適當的距離 -->
             <!-- custom-button 自訂的 CSS -->
@@ -128,7 +143,7 @@
             </div>
             <!-- 導覽選單 -->
             <ul class="navbar-nav">
-                <li><a class="nav-link" href="#">首頁</a></li>
+                <li><a class="nav-link" href="/">首頁</a></li>
                 <li><a class="nav-link" href="#">關於我們</a></li>
             </ul>
         </div>
@@ -191,8 +206,11 @@
             </div>
         </div>
 
-    </div>
+    <!--</div>-->
 
+	<div>
+		<h2>關於我們</h2>
+	</div>
 
 
 

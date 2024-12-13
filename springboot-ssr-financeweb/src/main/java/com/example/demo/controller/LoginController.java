@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.dto.UserCert;
-import com.example.demo.model.dto.UserDto;
 import com.example.demo.model.dto.UserRegistrationDto;
 import com.example.demo.service.CertService;
 
@@ -39,6 +38,18 @@ public class LoginController {
 		try {
 			// 調用業務邏輯層，通過email和hashedPassword獲取驗證結果
 			userCert = certService.getCert(email, hashedPassword);
+			
+	        //UserCert 包含角色信息
+	        String role = userCert.getRole(); // 從 UserCert 中獲取角色
+	        session.setAttribute("role", role); // 將角色保存到 Session
+	        
+	        //UserCert 包含姓名信息，用於顯示首頁名字
+	        String firstName = userCert.getFirstName();
+	        //model.addAttribute("firstName", firstName); // 傳遞用戶名到 JSP
+	        session.setAttribute("firstName", firstName);
+	        
+	        session.setAttribute("userCert", userCert);// 放憑證
+	        session.setAttribute("locale", req.getLocale());// 取得客戶端所在地 例如: zh_TW
 		} catch (Exception e) {
 			// 將錯誤丟給(重導) error.jsp
 //			model.addAttribute("message", e.getMessage());
@@ -50,9 +61,9 @@ public class LoginController {
 		}
 		System.out.println("Login successful, redirecting to /admin/users");
 		// 將憑證放入 session 變數中以利其他程式進行取用與驗證
-		session.setAttribute("userCert", userCert); // 放憑證
-		session.setAttribute("locale", req.getLocale()); // 取得客戶端所在地 例如: zh_TW
-		
+		//session.setAttribute("userCert", userCert); 
+		//session.setAttribute("locale", req.getLocale()); 
+	
 		// 打印 session ID 到控制台
 	    System.out.println("Session ID: " + session.getId());
 		

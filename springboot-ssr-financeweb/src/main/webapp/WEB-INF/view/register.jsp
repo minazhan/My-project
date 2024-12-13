@@ -56,7 +56,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: #cad6e9;
+	background-color: #3e417d;
 	color: #fff;
 	padding: 15px 20px;
 	display: flex;
@@ -64,6 +64,10 @@
 	align-items: center;
 	z-index: 1000;
 }
+
+    .navbar-brand{
+        color:#ffe6e6;
+    }
 
 .card {
 	border-radius: 10px;
@@ -97,6 +101,12 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         } */
+        
+            .btn{
+        background-color: rgba(90, 132, 195, 1);
+        float: right;
+        border: none;
+    }
 .footer {
 	position: relative;
 	bottom: 0;
@@ -134,11 +144,11 @@ body {
 <body>
 	<!-- <div class="container-fluid" > -->
 	<nav class="navbar">
-		<a class="navbar-brand" href="#">探即理財</a>
+		<a class="navbar-brand" href="/">發發理財</a>
 	</nav>
 
 	<div class="container my-5">
-		<div class="card">
+		<div class="card mx-auto" style="max-width: 600px; min-width: 500px; border-radius: 15px;">
 			<div class="card-header text-center"
 				style="font-size: 1.5rem; font-weight: bold; border-radius: 15px;">
 				註冊</div>
@@ -290,6 +300,23 @@ body {
 							placeholder="選擇日期" />
 						<form:errors path="birthDate" cssClass="text-danger" />
 					</div>
+					
+					<!-- role -->
+					<div class="col-md-6">
+						<label for="inputRole4" class="form-label">權限</label>
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" path="role"
+								id="roleUser" value="USER" checked="checked" /> 
+							<label class="form-check-label" for="roleUser"> USER </label>
+						</div>
+						<div class="form-check form-check-inline">
+							<form:radiobutton class="form-check-input" path="role"
+								id="roleAdmin" value="ADMIN" /> 
+							<label class="form-check-label" for="roleAdmin"> ADMIN </label>
+						</div>
+						<form:errors path="role" cssClass="text-danger" />
+					</div>
+					<div class="col-md-6"></div>
 
 					<script>
 						$(document).ready(function() {

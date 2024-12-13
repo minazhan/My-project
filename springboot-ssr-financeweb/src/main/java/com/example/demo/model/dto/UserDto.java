@@ -36,5 +36,8 @@ public class UserDto { //不包含敏感信息，用於返回給前端（例如�
 	
 	@NotNull(message = "{userDto.email.notNull}")
 	private String email;//電子郵件
+	
+	@NotNull(message = "{userDto.role.notNull}")
+	private String role;//角色權限
 
 }
