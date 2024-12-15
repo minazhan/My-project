@@ -5,10 +5,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.example.demo.service.SurveyService;
 
 @SpringBootApplication
+@EnableScheduling //啟用定時任務功能
 public class SpringbootSsrFinancewebApplication {
 	
 //	@Autowired
