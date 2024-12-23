@@ -28,6 +28,25 @@
 
 </head>
 
+<style>
+	body {
+    font-size: 1.6rem; /* 預設字體大小調整 */
+    font-family: "Roboto Serif", serif;
+    transform-origin: top left;  /*設定縮放的原點 */
+    /*width: 100%;   增加寬度以適應縮放後的內容 */
+    overflow-x: hidden; /* 隱藏橫向滾動條 */
+    margin: 0; /* 移除預設外邊距 */
+    height: 100vh; /* 設定高度為整個視窗高度 */
+    background-image: url('${pageContext.request.contextPath}/img/bg6.jpg'); 替換為你的背景圖片路徑 */
+    background-size: cover; /* 縮放背景圖片，使其完全覆蓋容器 */
+    background-position: center; /* 置中圖片 */
+    background-repeat: no-repeat; /* 禁止圖片重複 */
+    background-attachment: fixed; /* 固定背景圖片 */
+  }
+
+
+</style>
+
 
 <body>
 
@@ -35,10 +54,10 @@
     <c:set var="role" value="${sessionScope.role}" />
     <c:set var="firstName" value="${sessionScope.firstName}" />
     
-    <!-- 加載 Bootstrap 的 JavaScript 功能 
+    <!-- 加載 Bootstrap 的 JavaScript 功能 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>-->
+        crossorigin="anonymous"></script>
         
     <!--    
     <script src="<c:url value='/js/script.js'/>"></script>-->  
@@ -48,12 +67,15 @@
     <!-- .navbar: 這是 Bootstrap 預設的導覽列樣式類別 -->
     <!-- <nav> 元素包含了一個類別 class="navbar navbar-expand-lg navbar-light fixed-top"，這表示這是一個導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        
         <div class="container-fluid"> <!--  Bootstrap 提供的一個類別，始終佔據視窗的全部寬度，無論螢幕大小 -->
-            <a class="navbar-brand" href="/">發發理財</a>
+            <div class="d-flex align-items-center">
+            <a class="navbar-brand" href="/" style="font-size: 3rem; color: #3e417d; font-weight: 600;">發發理財</a>
             <!-- 只有當 firstName 存在時顯示歡迎信息 -->
     		<c:if test="${sessionScope.firstName != null}">
-            	<p>歡迎, ${sessionScope.firstName}！</p>
+            	<p style="margin: 0px; font-size: x-large;">歡迎, ${sessionScope.firstName}！</p>
             </c:if>
+            </div>
 
             <!-- 漢堡按鈕，控制 Offcanvas，適用於小螢幕 -->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -78,18 +100,21 @@
                 </div>
 
                 <!-- 搜尋按鈕，僅在大螢幕顯示 -->
-                <!--  <button class="btn btn-outline-secondary ms-2 d-none d-lg-inline-block" id="searchBtn" type="button">-->
-                    <!-- <i class="fas fa-search"></i>  Font Awesome 放大鏡圖示 -->
-                    <!--<i class="material-icons">search</i>-->
+                <!--<button class="btn btn-outline-secondary ms-2 d-none d-lg-inline-block" id="searchBtn" type="button">-->
+                    <!--<i class="fas fa-search"></i>  Font Awesome 放大鏡圖示 -->
+                    <!--<i class="material-icons">search</i>
                 <!--</button>-->
 
                 <!-- 註冊和登入 -->
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="font-weight: bolder;">
                     <li class="nav-item">
                         <a class="nav-link" href="/">首頁</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">關於我們</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/stocks/stock_list">股票清單</a>
                     </li>
                     <li class="nav-item">
                     	<c:if test="${role == 'USER'}">
@@ -104,20 +129,22 @@
                         </c:if>
                     </li>
                 </ul>
-               
-
-
             </div>
         </div>
     </nav>
 
     <!-- 導覽列下方的圖片 -->
     <div class="container-fluid p-0 position-relative" style="text-align: center;">
-        <img src="<c:url value='/img/pig_6.jpg' />" class="full-width-image" alt="...">
+        <img src="${pageContext.request.contextPath}/img/pig_6.jpg" class="full-width-image" alt="..." style="height: auto;">
 
         <!-- 疊加在圖片上的文字 -->
-        <div class="overlay-content position-absolute w-100" style="top: 50%; left: 50%; transform: translate(-50%, -50%); color: 3e417d;">
-            <h2>圖片上文字描述</h2>
+        <div class="overlay-content position-absolute w-100" style="top: 50%; left: 50%; transform: translate(-50%, -50%); color: 635c4d;" style="font-size: 67%;">
+            <h2>提供您個人化的理財服務</h2>
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+                馬上註冊
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+            </h3>
             <!-- mt-3讓按鈕和標題之間保持適當的距離 -->
             <!-- custom-button 自訂的 CSS -->
             <a href="register" class="btn btn-primary custom-button mt-3">註冊</a>
@@ -145,6 +172,7 @@
             <ul class="navbar-nav">
                 <li><a class="nav-link" href="/">首頁</a></li>
                 <li><a class="nav-link" href="#">關於我們</a></li>
+                <li><a class="nav-link" href="#">股票清單</a></li>
             </ul>
         </div>
     </div>
@@ -174,32 +202,35 @@
     <div style="height: 2000px; padding-top: 100px;">
         <h1 class="text-center">滾動以查看導覽列變化</h1>-->
 
-        <div class="container my-5 custom-padding">
+        <div class="container my-5 custom-padding" style="width: 70%;">
+            <h2 style="text-align: center;">
+                系統特點
+            </h2>
             <div class="row ">
-                <div class="col-md-4 col-sm-6 col-12 mb-4" style="height: 350px;">
+                <div class="col-md-4 col-sm-6 col-12 mb-4" style="height: 200px;">
                     <div class="card h-100 border-0 shadow-sm rounded" >
                         <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="height: 100%;">
-                            <i class="material-icons one" style="font-size: 48px; color: #6c757d;">help_outline</i>
-                            <h5 class="card-title mt-3">當父母母輩的理財經驗不再管用</h5>
-                            <p class="card-text text-muted">不理財，真的可以嗎？</p>
+                            <i class="material-icons one" style="font-size: 48px; color: #6c757d;">donut_small</i>
+                            <h5 class="card-title mt-3">簡單易用的收支紀錄</h5>
+                            <!-- <p class="card-text text-muted">不理財，真的可以嗎？</p> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <div class="col-md-4 col-sm-6 col-12 mb-4" style="height: 200px;">
                     <div class="card h-100 border-0 shadow-sm rounded">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="height: 100%;">
-                            <i class="material-icons" style="font-size: 48px; color: #6c757d;">help_outline</i>
-                            <h5 class="card-title mt-3">當我還在猶豫何時開始投資理財</h5>
-                            <p class="card-text text-muted">沒有計劃，更面對不了變化。</p>
+                            <i class="material-icons" style="font-size: 48px; color: #6c757d;">recommend</i>
+                            <h5 class="card-title mt-3">風險偏好提供適合的理財產品</h5>
+                            <!-- <p class="card-text text-muted">沒有計劃，更面對不了變化。</p> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <div class="col-md-4 col-sm-6 col-12 mb-4" style="height: 200px;">
                     <div class="card h-100 border-0 shadow-sm rounded">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center text-center" style="height: 100%;">
-                            <i class="material-icons" style="font-size: 48px; color: #6c757d;">help_outline</i>
-                            <h5 class="card-title mt-3">為什麼理財經驗不那麼愉快？</h5>
-                            <p class="card-text text-muted">陪伴我的財務旅途專家。</p>
+                            <i class="material-icons" style="font-size: 48px; color: #6c757d;">list_alt</i>
+                            <h5 class="card-title mt-3">提供熱門股票列表</h5>
+                            <!-- <p class="card-text text-muted">陪伴我的財務旅途專家。</p> -->
                         </div>
                     </div>
                 </div>
@@ -208,45 +239,51 @@
 
     <!--</div>-->
 
-	<div>
+	<div class="container py-5" style="width: 70%; text-align: center;">
 		<h2>關於我們</h2>
+		<p>致力於打造一個專屬於您的個人理財推薦系統，協助每位使用者輕鬆管理日常財務。<br>
+		透過簡單直觀的介面，您可以自行記錄收入與支出，清楚掌握個人財務狀況。<br>
+		此外，系統將根據您的紀錄與風險偏好，提供量身打造的理財建議，讓理財變得更高效、更貼近您的需求。<br>
+		目標是讓每個人都能輕鬆邁向財務健康，實現理想的未來生活。
+		</p>
 	</div>
 
 
 
     <!-- JavaScript：監聽滾動事件 -->
     <script>
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) { // 當滾動超過 50px 時
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        const getButtonById=(id)=>{
-            document.getElementById(id);
+    window.addEventListener('scroll', function () {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) { // 當滾動超過 50px 時
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
         }
-        document.getElementById("searchBtn").addEventListener("click",  ()=> {
-            var searchBox =getButtonById("searchBox");
-            var searchBtn = getButtonById("searchBtn");
+    });
+
+    const getButtonById=(id)=>{
+        document.getElementById(id);
+    }
+    document.getElementById("searchBtn").addEventListener("click",  ()=> {
+        var searchBox =getButtonById("searchBox");
+        var searchBtn = getButtonById("searchBtn");
 
 
-            // 獲取搜尋按鈕的位置
-            var rect = searchBtn.getBoundingClientRect();
+        // 獲取搜尋按鈕的位置
+        var rect = searchBtn.getBoundingClientRect();
 
-            // 設定搜尋框的位置 - 對齊按鈕尾部(rect.right - searchBox.offsetWidth)
-            searchBox.style.top = (rect.bottom + window.scrollY) + "px";
-            searchBox.style.left = (rect.left + window.scrollX) + "px";
+        // 設定搜尋框的位置 - 對齊按鈕尾部(rect.right - searchBox.offsetWidth)
+        searchBox.style.top = (rect.bottom + window.scrollY) + "px";
+        searchBox.style.left = (rect.left + window.scrollX) + "px";
 
-            // 顯示搜尋框
-            searchBox.style.display = "block";
-        });
+        // 顯示搜尋框
+        searchBox.style.display = "block";
+    });
 
-        document.getElementById("closeSearch").addEventListener("click", function () {
-            document.getElementById("searchBox").style.display = "none";
-        });
+    document.getElementById("closeSearch").addEventListener("click", function () {
+        document.getElementById("searchBox").style.display = "none";
+    });
+
 
 
     </script>

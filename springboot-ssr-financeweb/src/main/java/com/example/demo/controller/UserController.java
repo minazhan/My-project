@@ -3,9 +3,12 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,9 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.dto.UserDto;
+import com.example.demo.model.dto.UserRiskResponseDto;
+import com.example.demo.response.ApiResponse;
+import com.example.demo.service.UserRiskResponseService;
 import com.example.demo.service.UserService;
 
 import jakarta.validation.Valid;
@@ -30,6 +36,8 @@ import jakarta.validation.Valid;
  * POST   /admin/user                 新增使用者
  * POST   /admin/user/update/{userId} 完整修改使用者
  * GET    /admin/user/delete/{userId} 刪除使用者
+ * 
+ * GET    /admin/user/detail/{userId} 顯示用戶明細(使用rest)
  * --------------------------------------------------------------------
  * */
 
@@ -40,6 +48,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRiskResponseService userRiskResponseService;
 	
 	//查詢所有使用者
 	@GetMapping
@@ -54,6 +65,7 @@ public class UserController {
         model.addAttribute("userDtos", userDtos);
 		return "user/user";
 	}
+	
 	
 	//新增使用者(後台人員填寫)
 	@PostMapping
@@ -102,4 +114,23 @@ public class UserController {
 //	}
 	
 	
+	
+	//顯示用戶明細，會傳回JSON格式
+//	@GetMapping("/detail/{userId}")
+//	@ResponseBody
+//	public ResponseEntity<ApiResponse<Map<String, Object>>> getUserDetails(@PathVariable Integer userId){
+//		
+//		UserDto userDto = userService.getUserById(userId);
+//		UserRiskResponseDto userRiskResponseDto = userRiskResponseService.getUserById(userId);
+//		
+//		
+//		//使用 Map 封裝返回數據
+//	    Map<String, Object> responseData = new HashMap<>();
+//	    responseData.put("UserId", userDto.getUserId());
+//	    responseData.put("BirthDate", userDto.getBirthDate());
+//	    responseData.put("RiskType", userRiskResponseDto.getRiskType());
+//	    
+//	    return ResponseEntity.ok(ApiResponse.success("查詢成功",responseData));
+//	}
+
 }

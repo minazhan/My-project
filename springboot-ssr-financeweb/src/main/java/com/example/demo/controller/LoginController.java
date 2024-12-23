@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.dto.UserCert;
 import com.example.demo.model.dto.UserRegistrationDto;
 import com.example.demo.service.CertService;
+import com.example.demo.service.EmailService;
+import com.example.demo.service.PasswordResetService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +23,14 @@ public class LoginController {
 	
 	@Autowired
 	private CertService certService;
+	
+	//從登入頁觸發忘記密碼
+	@Autowired
+    private PasswordResetService passwordResetService;
+	
+	@Autowired
+    private EmailService emailService;
+	
 	
 	//顯示登入頁面
 	@GetMapping
@@ -69,5 +79,29 @@ public class LoginController {
 		
 		return "redirect:/"; // 登入成功後到首頁，目前還沒做首頁，所以先放後台頁面
 	}
+	
+	
+	
+	//從登入頁觸發忘記密碼
+	@PostMapping("/forgot-password")
+    public String forgotPassword(@RequestParam String email, Model model) {
+        try {
+            // 生成臨時密碼
+            String temporaryPassword = passwordResetService.generateTemporaryPassword();
+
+            // 更新用戶密碼
+            passwordResetService.updatePassword(email, temporaryPassword);
+
+            // 發送臨時密碼到用戶信箱
+            String subject = "您的臨時密碼";
+            String body = "您好，\n\n您的臨時密碼是：" + temporaryPassword + "\n請盡快使用此密碼登入並修改為新密碼。";
+            emailService.sendEmail(email, subject, body);
+
+            model.addAttribute("message", "臨時密碼已成功發送！");
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "forgotPassword"; // 返回到忘記密碼頁面
+    }
 
 }

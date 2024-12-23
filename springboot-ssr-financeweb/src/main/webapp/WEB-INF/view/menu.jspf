@@ -17,19 +17,31 @@
         background-color: rgba(70, 112, 175, 1); /* 調整顏色變暗一些 */
         color: #ffffff; /* 保持文字顏色為白色 */
     }
+    
+    .nav-link a{
+    font-size: 1rem; 
+    text-decoration: none;
+    padding: 20px;
+}
+
+.nav-link a:hover{
+    text-decoration: underline;
+}
 </style>
     
-<div style="background-color: #dddddd;">
-	<div style="padding: 10px">
-		<a href="/login" class="button-lightblue pure-button" >Login</a>
-		<a href="/admin/users" class="button-lightblue pure-button" >用戶管理</a>
-		<a href="/report" class="button-lightblue pure-button" >資料圖表報告</a>
-		<!-- logout點擊重導到 成功登出會有其他按鈕供選擇 -->
-		<a href="/logout" class="button-lightblue pure-button" style="float: right;">
-			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-			<path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
-			</svg>
-		</a>
-		<a href="/products" class="button-lightblue pure-button" >Product 列表</a>
-	</div>
+<div style="background-color: #3e417d; ">
+		<div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+	        <div class="nav-link" style="padding: 5px">
+	            <a href="/"  style="color: #ffe6e6;">回首頁</a>
+	            <a href="/admin/users" style="color: #ffe6e6;">用戶管理</a>
+	            <a href="/admin/charts" style="color: #ffe6e6;" >資料圖表</a>
+	            <a href="/stocks/user_stock_list" style="color: #ffe6e6;" >股票列表管理</a>
+	        </div>    
+            <!-- logout點擊重導到 成功登出會有其他按鈕供選擇 -->
+            <a href="/logout" style="float: right;">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffe6e6">
+                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+                </svg>
+            </a>
+        </div>  
 </div>

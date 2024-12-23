@@ -35,8 +35,13 @@
 	<!-- 引入 userInfoPage.js -->
 	<script src="/js/userInfoPage.js"></script>
 	
+	<!-- 引入 recommendations.js -->
+	<script src="/js/recommendations.js"></script>
+	
 	<!-- 引入 updateUser.js -->
 	<script src="/js/updateUser.js"></script>
+	
+	
 
     <style>
         .container-layout {
@@ -48,33 +53,43 @@
         .sidebar {
             flex: 0 0 200px; /* 固定寬度為 200px，不會被壓縮 */
             width: 200px;
-            padding: 20px;
-            background-color: #f0f0f0;
+            padding: 10px;
+            background-color: #e6dbcf;
             height: auto;
+            text-align: center;
 
         }
 
         .sidebar button {
             display: block;
             width: 100%;
-            margin-bottom: 10px;
+            margin: 10px 0; /* 上下間距 */
             padding: 10px;
-            background-color: #fff;
+            background-color: #f8f3f0;
             border: 1px solid #ddd;
             cursor: pointer;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+            border-radius: 25px; /* 圓弧半徑值 */
         }
+        
+        .sidebar button:hover {
+		    background-color: #f0e6e0; /* 滑鼠懸停時的背景顏色 */
+		    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* 懸停時陰影加強 */
+		    transition: all 0.3s ease; /* 平滑過渡效果 */
+		}
 
         .content {
             flex-grow: 1;
             padding: 15px;
-            margin-left: 20px;
-            overflow: auto; /* 防止內容超出影響布局 */
+            margin-left: 10px;
+            overflow: auto; /* 防止內容超出影響布局*/ 
+            background-color: #f0f2f5;
         }
 
         
+        
     </style>
-    <title>AJAX 動態加載 HTML 頁面</title>
+    <title>AJAX加載頁面</title>
 </head>
 
 <body>
@@ -84,12 +99,16 @@
             <button onclick="loadPage('userInfo.html')">個人資料設定</button>
             <button onclick="loadPage('recommendations.html')">推薦列表</button>
             <button onclick="loadPage('transaction.html')">支出/收入</button>
-            <button onclick="loadPage('summary.html')">結餘</button>
+            <!--<button onclick="loadPage('summary.html')">結餘</button>-->
+            <p></p>
+            <a href="http://localhost:8081/" style="text-decoration: none;">
+			    <button>首頁</button>
+			</a>
         </div>
 
         <!-- 右側內容區域 -->
         <div id="content" class="content">
-            <h3>使用者您好！請點擊左側按鈕以顯示內容</h3>
+            <h3 style="text-align: center;">使用者您好！請點擊左側按鈕顯示內容</h3>
         </div>
     </div>
    </body>

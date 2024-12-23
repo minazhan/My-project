@@ -35,6 +35,54 @@
 	</properties>
 	<dependencies>
 	
+	     <!-- Google OAuth Client Library -->
+     	<dependency>
+    		<groupId>com.google.oauth-client</groupId>
+    		<artifactId>google-oauth-client-jetty</artifactId>
+			<version>1.33.1</version>
+		</dependency>
+     
+    	<dependency>
+        	<groupId>com.google.oauth-client</groupId>
+        	<artifactId>google-oauth-client</artifactId>
+        	<version>1.33.1</version>
+    	</dependency>
+
+    	<!-- Google API Client Library -->
+    	<dependency>
+        	<groupId>com.google.api-client</groupId>
+        	<artifactId>google-api-client</artifactId>
+        	<version>1.33.1</version>
+    	</dependency>
+
+    	<!-- Google HTTP Client (supports JSON) -->
+    	<dependency>
+        	<groupId>com.google.http-client</groupId>
+        	<artifactId>google-http-client-jackson2</artifactId>
+        	<version>1.39.2</version>
+    	</dependency>
+
+    	<!-- Gmail API Library -->
+		<dependency>
+    		<groupId>com.google.apis</groupId>
+    		<artifactId>google-api-services-gmail</artifactId>
+    		<version>v1-rev20211108-1.32.1</version>
+		</dependency>
+
+
+    	<!-- JavaMail API (for creating MIME messages) -->
+    	<dependency>
+        	<groupId>com.sun.mail</groupId>
+        	<artifactId>javax.mail</artifactId>
+        	<version>1.6.2</version>
+    	</dependency>
+	
+		<!--  Spring Security -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	
 		<!-- Yahoo Finance API -->
 		<dependency>
     		<groupId>org.jsoup</groupId>

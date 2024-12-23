@@ -42,7 +42,7 @@ body {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: #cad6e9;
+	background-color: #3e417d;
 	color: #fff;
 	padding: 15px 20px;
 	display: flex;
@@ -50,18 +50,22 @@ body {
 	align-items: center;
 	z-index: 1000;
 }
+
+	    .navbar-brand{
+        color:#ffe6e6;
+    }
 </style>
 </head>
 <body>
 	<nav class="navbar">
-		<a class="navbar-brand" href="#">探即理財</a>
+		<a class="navbar-brand" href="#">發發理財</a>
 	</nav>
 	<div class="container my-3">
 
 		<!-- 表單標題 -->
 		<div class="text-center mb-4">
 			<h2>個人理財評估</h2>
-			<p>各位使用者您好，問卷只需要很短時間完成~ 讓XX理財為您打造你專屬的理財系統吧！</p>
+			<p>各位使用者您好，問卷只需要很短時間完成~ 讓發發理財為您打造你專屬的理財系統吧！</p>
 		</div>
 
 		<!-- 表單開始 -->

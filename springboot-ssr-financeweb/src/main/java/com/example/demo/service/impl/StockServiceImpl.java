@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.mapper.StockEntityMapper;
+import com.example.demo.model.dto.StockDto;
 import com.example.demo.model.entity.StockCodeEntity;
 import com.example.demo.model.entity.StockEntity;
 import com.example.demo.repository.StockCodeRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StockServiceImpl implements StockService {
@@ -20,6 +23,9 @@ public class StockServiceImpl implements StockService {
 
     @Autowired
     private StockRepository stockRepository; // 保存到這裡
+    
+    @Autowired
+    private StockEntityMapper stockEntityMapper; //轉換
 
     public void updateStocks() {
         // 從資料庫獲取所有股票數據
@@ -43,8 +49,8 @@ public class StockServiceImpl implements StockService {
     // 根據成交量分類風險
     private String classifyRiskByVolume(Long volume) {
         if (volume == null || volume == 0L) return "未知風險";
-        if (volume < 100000) return "低風險";
-        if (volume < 1000000) return "中風險";
+        if (volume < 10000) return "低風險";
+        if (volume < 100000) return "中風險";
         return "高風險";
     }
 
@@ -62,4 +68,15 @@ public class StockServiceImpl implements StockService {
 
         stockRepository.save(stockEntity);
     }
+    
+    //查詢所有股票資料
+    @Override
+	public List<StockDto> getAllStocks() {
+    	return stockRepository.findAll()
+    			.stream()
+				.map(stock -> stockEntityMapper.toDto(stock))
+				.collect(Collectors.toList());
+
+    }
+    
 }

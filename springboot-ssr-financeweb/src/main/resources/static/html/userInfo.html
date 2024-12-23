@@ -13,18 +13,17 @@
         } */
 
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            margin-bottom: 0px;
-            margin-top: 0px;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            /* overflow: hidden; */
-            width: 50%;
-            overflow-x: auto;
-            padding: 0px;
-
+    max-width: 800px;
+    margin: 50px auto;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 90%; /* 改為百分比 */
+    min-width: 400px; /* 防止壓縮過小 */
+    overflow-x: auto;
+    padding: 0px;
         }
 
         .header {
@@ -51,7 +50,7 @@
 
         th, td {
             padding: 15px;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #ddd;
         }
 
@@ -69,52 +68,40 @@
             padding: 10px 20px;
             font-size: 1rem;
             color: white;
-            background-color: #0078D7;
+            background-color: #5a84c3;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             display: block;
-    		margin: 20px auto 0; /* 上方 20px 外邊距，水平居中 */
+    		margin: 20px auto 20px; /* 上方 20px 外邊距，水平居中 */
         }
         .personal-button:hover {
             background-color: #005bb5;
         }
 
-        @media (max-width: 768px) {
-            .header {
-                font-size: 1.2rem;
-                padding: 10px 15px;
-            }
+       @media (max-width: 768px) {
+    .header {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+        flex-direction: column; /* 適用於較小螢幕，直接合併此屬性 */
+    }
 
-            th, td {
-                padding: 10px;
-            }
+    .header svg {
+        margin: 0 0 5px 0; /* 小螢幕適用 */
+    }
 
-            .personal-button {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
-        }
+    th, td {
+        font-size: 0.9rem;
+        padding: 8px; /* 使用較小的間距 */
+        text-align: center; /* 居中，適用於小螢幕 */
+    }
 
-        @media (max-width: 480px) {
-            .header {
-                flex-direction: column;
-            }
+    .personal-button {
+        font-size: 0.8rem; /* 最小字體大小 */
+        padding: 6px 12px; /* 最小按鈕大小 */
+    }
+}
 
-            .header svg {
-                margin: 0 0 5px 0;
-            }
-
-            th, td {
-                font-size: 0.9rem;
-                padding: 8px;
-            }
-
-            .personal-button {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-        }
 
     </style>
     
@@ -132,11 +119,11 @@
                 </tr>
                	<tr>
                     <td>姓氏</td>
-                    <td><input type="text" id="lastName" placeholder="(例如)王"></td>
+                    <td><input type="text" id="lastName" placeholder="ex:王"></td>
                 </tr>
                 <tr>
                     <td>名字</td>
-                    <td><input type="text" id="firstName" placeholder="(例如)王小明"></td>
+                    <td><input type="text" id="firstName" placeholder="ex:小明"></td>
                 </tr>
                 <tr>
                     <td>性別</td>
@@ -170,11 +157,11 @@
                 </tr>-->
                 <tr>
                     <td>Email</td>
-                    <td><input type="email" id="email" placeholder="(例如)abc@example.com"></td>
+                    <td><input type="email" id="email" placeholder="ex:abc@example.com"></td>
                 </tr>
                 <tr>
                     <td>生日</td>
-                    <td><input type="date" id="birthDate" readonly/></td>
+                    <td><input type="date" id="birthDate" onkeydown="return false;"/></td>
                 </tr>
             </table>
             <button type="button" class="personal-button" onclick="updateUser()">編輯會員資料</button>

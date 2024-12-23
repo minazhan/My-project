@@ -38,7 +38,7 @@ public class TransactionController {
 	public String getTransactions(Model model,@ModelAttribute TransactionDto transactionDto){
 		List<TransactionDto> transactionDtos = transactionService.getAllTransactions();
 		model.addAttribute("transactionDtos" , transactionDtos);
-		return "/transaction"; //對應 Thymeleaf 頁面名稱
+		return "/transaction";
 	}
 	
 	//新增交易資料

@@ -125,6 +125,10 @@
 	.footer-links a:hover {
 		text-decoration: underline;
 	}
+	
+	p {
+		margin: 0px;
+	}
 </style>
 
 </head>
@@ -180,7 +184,7 @@
 		<footer class="footer">
 			<p>© Copyright 2024</p>
 			<div class="footer-links">
-				<a href="">關於我們</a> <a href="">聯絡我們</a> <a href="">隱私政策</a>
+				<p>聯絡我們<br>(admin@finance.com)</p>
 			</div>
 
 		</footer>
