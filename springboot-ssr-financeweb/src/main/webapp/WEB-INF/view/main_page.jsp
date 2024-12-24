@@ -43,6 +43,12 @@
     background-repeat: no-repeat; /* 禁止圖片重複 */
     background-attachment: fixed; /* 固定背景圖片 */
   }
+  
+          .brand-logo{
+            width: 150px;
+            height: 60px;
+            object-fit: contain;
+        }
 
 
 </style>
@@ -70,10 +76,12 @@
         
         <div class="container-fluid"> <!--  Bootstrap 提供的一個類別，始終佔據視窗的全部寬度，無論螢幕大小 -->
             <div class="d-flex align-items-center">
-            <a class="navbar-brand" href="/" style="font-size: 3rem; color: #3e417d; font-weight: 600;">發發理財</a>
+            <a href="/" class="navbar-brand">
+        		<img src="./img/finance.PNG" alt="Finance Logo" class="brand-logo">
+    		</a>
             <!-- 只有當 firstName 存在時顯示歡迎信息 -->
     		<c:if test="${sessionScope.firstName != null}">
-            	<p style="margin: 0px; font-size: x-large;">歡迎, ${sessionScope.firstName}！</p>
+            	<p style="margin: 0px; font-size: large;">歡迎, ${sessionScope.firstName}！</p>
             </c:if>
             </div>
 
@@ -127,6 +135,9 @@
                         	<a class="nav-link" href="/admin/users">後臺登入</a>
                         	<!--  <button onclick="window.location. href="/admin/users">後臺登入</button>-->
                         </c:if>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">登出</a>
                     </li>
                 </ul>
             </div>

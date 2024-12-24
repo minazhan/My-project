@@ -12,7 +12,7 @@ html {
 
 /* 導覽列顏色 */
 .navbar {
-    padding: 0px 30px;
+    padding: 10px 30px;
     background-color: rgba(255, 255, 255, 0.5);
 }
 /* 滾動導覽列顏色 */
@@ -28,7 +28,7 @@ html {
 }
 /* 導覽列圖片 */
 .navbar-brand img {
-    max-height: 50px; /* 限制品牌 Logo 的高度 */
+    max-height: 60px; /* 限制品牌 Logo 的高度 */
 }
 /* 導覽列上文字(首頁、註冊、login) */
 .nav-link {

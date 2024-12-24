@@ -58,7 +58,7 @@
 	width: 100%;
 	background-color: #3e417d;
 	color: #fff;
-	padding: 15px 20px;
+	padding: 5px 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -140,6 +140,12 @@ body {
 p {
 	margin: 0px;
 }
+
+        .brand-logo{
+            width: 150px;
+            height: 60px;
+            object-fit: contain;
+        }
 </style>
 
 
@@ -148,7 +154,9 @@ p {
 <body>
 	<!-- <div class="container-fluid" > -->
 	<nav class="navbar">
-		<a class="navbar-brand" href="/">發發理財</a>
+		<a href="/" class="navbar-brand">
+        	<img src="./img/finance3.PNG" alt="Finance Logo" class="brand-logo">
+    	</a>
 	</nav>
 
 	<div class="container my-5">

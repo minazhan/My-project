@@ -13,23 +13,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .securityMatcher("/**") // 匹配所有請求
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/login", "/register", "/css/**", "/js/**").permitAll() // 公開訪問
-                .anyRequest().authenticated() // 其他路徑需要身份驗證
-            )
-            .formLogin(login -> login
-                .loginPage("/login") // 指定自訂登入頁面
-                .defaultSuccessUrl("/home", true) // 登入成功跳轉首頁
-                .failureUrl("/login?error") // 登入失敗跳轉登入頁面
-                .permitAll()
-            )
+            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // 允許所有請求
+            .csrf(csrf -> csrf.disable()) // 停用 CSRF（僅用於開發或測試環境）
             .logout(logout -> logout
-                .logoutUrl("/logout") // 設定登出 URL
-                .logoutSuccessUrl("/") // 登出後跳轉首頁
-                .permitAll()
-            );
-
+                    .logoutUrl("/logout") // 設置登出請求的路徑
+                    .logoutSuccessUrl("/") // 登出成功後跳轉到首頁
+                    .invalidateHttpSession(true) // 清除 HttpSession
+                    .permitAll()); // 允許所有人訪問登出功能
         return http.build();
     }
 

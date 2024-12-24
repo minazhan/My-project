@@ -44,7 +44,7 @@ body {
 	width: 100%;
 	background-color: #3e417d;
 	color: #fff;
-	padding: 15px 20px;
+	padding: 5px 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -54,18 +54,26 @@ body {
 	    .navbar-brand{
         color:#ffe6e6;
     }
+    
+    	        .brand-logo{
+            width: 150px;
+            height: 60px;
+            object-fit: contain;
+        }
 </style>
 </head>
 <body>
 	<nav class="navbar">
-		<a class="navbar-brand" href="#">發發理財</a>
+		<a href="/" class="navbar-brand">
+        	<img src="./img/finance3.PNG" alt="Finance Logo" class="brand-logo">
+    	</a>
 	</nav>
 	<div class="container my-3">
 
 		<!-- 表單標題 -->
 		<div class="text-center mb-4">
 			<h2>個人理財評估</h2>
-			<p>各位使用者您好，問卷只需要很短時間完成~ 讓發發理財為您打造你專屬的理財系統吧！</p>
+			<p>各位使用者您好，問卷只需要很短時間完成~ 讓個人理財為您打造你專屬的理財系統吧！</p>
 		</div>
 
 		<!-- 表單開始 -->

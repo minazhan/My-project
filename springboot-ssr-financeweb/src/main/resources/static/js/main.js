@@ -73,7 +73,7 @@ function initializeTransactionPage() {
 		$startDateInput.hide();
 		$endDateInput.hide();
 
-		//初始化圖表
+		//初始化圖表 '#4CAF50', '#F44336'
 		//Chart.js 需要原生 DOM 元素的 context，.get(0) 來獲取原生的 DOM 元素
 		const ctx = $('#donutChart').get(0).getContext('2d');
 		const myChart = new Chart(ctx, {
@@ -83,7 +83,7 @@ function initializeTransactionPage() {
 				datasets: [{
 					label: '總計',
 					data: [0, 0],
-					backgroundColor: ['#4CAF50', '#F44336']
+					backgroundColor: ['#6cba6f ', '#e27246']
 				}]
 			},
 			options: {

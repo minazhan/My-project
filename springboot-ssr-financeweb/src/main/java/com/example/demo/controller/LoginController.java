@@ -83,25 +83,25 @@ public class LoginController {
 	
 	
 	//從登入頁觸發忘記密碼
-	@PostMapping("/forgot-password")
-    public String forgotPassword(@RequestParam String email, Model model) {
-        try {
-            // 生成臨時密碼
-            String temporaryPassword = passwordResetService.generateTemporaryPassword();
-
-            // 更新用戶密碼
-            passwordResetService.updatePassword(email, temporaryPassword);
-
-            // 發送臨時密碼到用戶信箱
-            String subject = "您的臨時密碼";
-            String body = "您好，\n\n您的臨時密碼是：" + temporaryPassword + "\n請盡快使用此密碼登入並修改為新密碼。";
-            emailService.sendEmail(email, subject, body);
-
-            model.addAttribute("message", "臨時密碼已成功發送！");
-        } catch (RuntimeException e) {
-            model.addAttribute("error", e.getMessage());
-        }
-        return "forgotPassword"; // 返回到忘記密碼頁面
-    }
+//	@PostMapping("/forgot-password")
+//    public String forgotPassword(@RequestParam String email, Model model) {
+//        try {
+//            // 生成臨時密碼
+//            String temporaryPassword = passwordResetService.generateTemporaryPassword();
+//
+//            // 更新用戶密碼
+//            passwordResetService.updatePassword(email, temporaryPassword);
+//
+//            // 發送臨時密碼到用戶信箱
+//            String subject = "您的臨時密碼";
+//            String body = "您好，\n\n您的臨時密碼是：" + temporaryPassword + "\n請盡快使用此密碼登入並修改為新密碼。";
+//            emailService.sendEmail(email, subject, body);
+//
+//            model.addAttribute("message", "臨時密碼已成功發送！");
+//        } catch (RuntimeException e) {
+//            model.addAttribute("error", e.getMessage());
+//        }
+//        return "forgotPassword"; // 返回到忘記密碼頁面
+//    }
 
 }

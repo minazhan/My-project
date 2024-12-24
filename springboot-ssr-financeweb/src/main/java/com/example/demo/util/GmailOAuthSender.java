@@ -51,6 +51,8 @@ public class GmailOAuthSender {
         Session session = Session.getDefaultInstance(props, null);
 
         MimeMessage email = new MimeMessage(session);
+        
+        email.setFrom(new InternetAddress("monmonzhen@gmail.com", "發發理財"));
         email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(to));
         email.setSubject(subject);
         email.setText(bodyText);

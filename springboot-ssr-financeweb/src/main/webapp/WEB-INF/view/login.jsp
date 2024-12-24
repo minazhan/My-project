@@ -35,7 +35,7 @@
 		width: 100%;
 		background-color: #3e417d;
 		color: #fff;
-		padding: 15px 20px;
+		padding: 5px 20px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -129,6 +129,12 @@
 	p {
 		margin: 0px;
 	}
+	
+	        .brand-logo{
+            width: 150px;
+            height: 60px;
+            object-fit: contain;
+        }
 </style>
 
 </head>
@@ -137,7 +143,9 @@
 
 	<div class="container-fluid">
 		<nav class="navbar">
-			<a class="navbar-brand" href="/">發發理財</a>
+			<a href="/" class="navbar-brand">
+        		<img src="./img/finance3.PNG" alt="Finance Logo" class="brand-logo">
+    		</a>
 		</nav>
 		
 
@@ -173,7 +181,7 @@
 						
 						<!-- 使用 Flexbox 平均分佈 -->
 						<div style="display: flex; justify-content: space-between;">
-							<button type="button" class="btn btn-outline-forgot">忘記密碼</button>
+							<a href="/forgot-password" class="btn btn-outline-forgot">忘記密碼</a>
 							<button type="submit" class="btn btn-outline-login">登入</button>
 						</div>
 					</div>
