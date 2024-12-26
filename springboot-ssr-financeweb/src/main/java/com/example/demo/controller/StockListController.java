@@ -72,12 +72,12 @@ public class StockListController {
 	public String  getStockCodeEntityList(Model model,@ModelAttribute StockCodeDto stockCodeDto) {
 		List<StockCodeDto> stockCodeDtos = yahooFinanceCrawlerService.getAllStocks();
 		// 分出前三名和剩下七個股票
-	    List<StockCodeDto> topStocks = stockCodeDtos.stream().limit(3).toList();
-	    List<StockCodeDto> remainingStocks = stockCodeDtos.stream().skip(3).limit(7).toList();
+	    //List<StockCodeDto> topStocks = stockCodeDtos.stream().limit(3).toList();
+	    //List<StockCodeDto> remainingStocks = stockCodeDtos.stream().skip(3).limit(7).toList();
 		
 	    //格式化成交量
 	    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-	    List<Map<String, Object>> formattedtopStocks = stockCodeDtos.stream().limit(3).map(topStock -> {
+	    List<Map<String, Object>> formattedtopStocks = stockCodeDtos.stream().skip(1).limit(3).map(topStock -> {
 	    	Map<String, Object> stockMap = new HashMap<>();
 	    	stockMap.put("stockId", topStock.getId());
 	        stockMap.put("stockSymbol", topStock.getStockSymbol());
@@ -88,7 +88,7 @@ public class StockListController {
 	        return stockMap;
 	    }).collect(Collectors.toList());
 	    
-	    List<Map<String, Object>> formattedremainingStocks = stockCodeDtos.stream().skip(3).limit(7).map(remainingStock -> {
+	    List<Map<String, Object>> formattedremainingStocks = stockCodeDtos.stream().skip(4).limit(7).map(remainingStock -> {
 	    	Map<String, Object> stockMap = new HashMap<>();
 	    	stockMap.put("stockId", remainingStock.getId());
 	        stockMap.put("stockSymbol", remainingStock.getStockSymbol());

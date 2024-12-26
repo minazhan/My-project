@@ -1,7 +1,7 @@
 <div class="user_info-container">
     <style>
     .container {
-        max-width: 500px;
+        max-width: 450px;
         margin: 10px auto;
         background: #f7f7f7;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -64,13 +64,14 @@
         width: auto;
         margin-left: 5px;
     }
-
+    
     .form-row .gender-group {
-        flex: 1;
-        display: flex;
-        justify-content: flex-start;
-        /*gap: 10px;  性別選項之間的間距 */
-    }
+    flex: 1;
+    display: flex;
+    flex-direction: row; /* 垂直排列 */
+    justify-content: center; /* 頂端對齊 */
+    gap: 5px; /* 垂直選項間距 */
+}
 
     .personal-button {
         margin: 10px auto;

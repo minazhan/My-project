@@ -119,7 +119,7 @@
                         <a class="nav-link" href="/">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">關於我們</a>
+                        <a class="nav-link" href="#aboutUs" onclick="scrollToAboutUs()">關於我們</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/stocks/stock_list">股票清單</a>
@@ -182,8 +182,23 @@
             <!-- 導覽選單 -->
             <ul class="navbar-nav">
                 <li><a class="nav-link" href="/">首頁</a></li>
-                <li><a class="nav-link" href="#">關於我們</a></li>
-                <li><a class="nav-link" href="#">股票清單</a></li>
+                <li><a class="nav-link" href="#aboutUs" onclick="scrollToAboutUs()">關於我們</a></li>
+                <li><a class="nav-link" href="/stocks/stock_list">股票清單</a></li>
+            	<li class="nav-item">
+                    <c:if test="${role == 'USER'}">
+                        <a class="nav-link" href="/index.html">個人頁面</a>
+                        <!-- <button onclick="window.location. href="/index.html">個人頁面</button> -->
+                    </c:if>
+                </li>
+                <li class="nav-item">
+                    <c:if test="${role == 'ADMIN'}">
+                        <a class="nav-link" href="/admin/users">後臺登入</a>
+                        <!--  <button onclick="window.location. href="/admin/users">後臺登入</button>-->
+                    </c:if>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">登出</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -250,7 +265,7 @@
 
     <!--</div>-->
 
-	<div class="container py-5" style="width: 70%; text-align: center;">
+	<div id="aboutUs" class="container py-5" style="width: 70%; text-align: center;">
 		<h2>關於我們</h2>
 		<p>致力於打造一個專屬於您的個人理財推薦系統，協助使用者輕鬆管理日常財務。<br>
 		透過簡單直觀的介面，您可以自行記錄收入與支出，清楚掌握個人財務狀況。<br>
@@ -294,6 +309,21 @@
     document.getElementById("closeSearch").addEventListener("click", function () {
         document.getElementById("searchBox").style.display = "none";
     });
+    
+    
+    
+    
+    
+    //點擊該按鈕或連結時，會觸發 scrollToAboutUs() 函數
+    function scrollToAboutUs() {
+        const aboutUsSection = document.getElementById('aboutUs');
+        if (aboutUsSection) {
+            aboutUsSection.scrollIntoView({
+                behavior: 'smooth', // 平滑滾動效果
+                block: 'start'     // 滾動到區塊頂端
+            });
+        }
+    }
 
 
 

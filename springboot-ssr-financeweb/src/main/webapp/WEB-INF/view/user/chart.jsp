@@ -79,6 +79,7 @@
     am5.ready(function() {
         // 第一個圖表
         var root = am5.Root.new("chartdiv");
+        root._logo.dispose();
         var chart = root.container.children.push(am5percent.PieChart.new(root, {
             layout: root.verticalLayout,
             paddingTop: 50, paddingBottom: 50, paddingLeft: 50, paddingRight: 50
@@ -122,11 +123,10 @@
         legend.data.setAll(series.dataItems);
 
         series.appear(1000, 100);
-        
-        root._logo.dispose();
 
         // 第二個圖表
         var rootForm = am5.Root.new("chartdiv_form");
+        rootForm._logo.dispose();
         var chartForm = rootForm.container.children.push(am5percent.PieChart.new(rootForm, {
             layout: rootForm.verticalLayout,
             paddingTop: 50, paddingBottom: 50, paddingLeft: 50, paddingRight: 50
@@ -167,9 +167,6 @@
         legendForm.data.setAll(seriesForm.dataItems);
 
         seriesForm.appear(1000, 100);
-        
-        root._logo.dispose();
-        
     });
     
     
