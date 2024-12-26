@@ -1,171 +1,161 @@
 <div class="user_info-container">
     <style>
-        /* body {
-            font-family: Arial, sans-serif;
-            margin: 0 auto;
-            padding: 0;
-            background-color: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        } */
+    .container {
+        max-width: 500px;
+        margin: 10px auto;
+        background: #f7f7f7;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        width: 90%;
+        min-width: 320px;
+        overflow-x: auto;
+    }
 
-        .container {
-    max-width: 800px;
-    margin: 50px auto;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 90%; /* 改為百分比 */
-    min-width: 400px; /* 防止壓縮過小 */
-    overflow-x: auto;
-    padding: 0px;
-        }
-
-        .header {
-            /* background-color: #98b5cd; */
-            /* color: white; */
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .header svg {
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .personal-button{
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: white;
-            background-color: #5a84c3;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-    		margin: 20px auto 20px; /* 上方 20px 外邊距，水平居中 */
-        }
-        .personal-button:hover {
-            background-color: #005bb5;
-        }
-
-       @media (max-width: 768px) {
     .header {
-        font-size: 1.2rem;
-        padding: 10px 15px;
-        flex-direction: column; /* 適用於較小螢幕，直接合併此屬性 */
+        padding: 15px 20px;
+        text-align: center;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .header svg {
-        margin: 0 0 5px 0; /* 小螢幕適用 */
+        margin-right: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
     }
 
     th, td {
-        font-size: 0.9rem;
-        padding: 8px; /* 使用較小的間距 */
-        text-align: center; /* 居中，適用於小螢幕 */
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .form-row label {
+        flex: 0 0 20%; /* 標籤占20%寬度 */
+        font-weight: bold;
+        text-align: center;
+        padding-right: 10px;
+    }
+
+    .form-row input,
+    .form-row select {
+        flex: 1; /* 輸入框填滿剩餘空間 */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        max-width: 300px; /* 最大寬度設為300px */
+    }
+
+    .form-row input[type="radio"] {
+        width: auto;
+        margin-left: 5px;
+    }
+
+    .form-row .gender-group {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        /*gap: 10px;  性別選項之間的間距 */
     }
 
     .personal-button {
-        font-size: 0.8rem; /* 最小字體大小 */
-        padding: 6px 12px; /* 最小按鈕大小 */
+        margin: 10px auto;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: white;
+        background-color: #5a84c3;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
     }
-}
 
+    .personal-button:hover {
+        background-color: #005bb5;
+    }
 
-    </style>
-    
-<div class="header">
-    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-        <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-    </svg>
-    會員資料</div>
-    <div class="container">
-        <form id="userForm">
-            <table>
-                <tr>
-                    <th>項目</th>
-                    <th>資料</th>
-                </tr>
-               	<tr>
-                    <td>姓氏</td>
-                    <td><input type="text" id="lastName" placeholder="ex:王"></td>
-                </tr>
-                <tr>
-                    <td>名字</td>
-                    <td><input type="text" id="firstName" placeholder="ex:小明"></td>
-                </tr>
-                <tr>
-                    <td>性別</td>
-                    <td>
-                        <label><input type="radio" name="gender" id="genderMale" value="男生" checked> 男生</label>
-                        <label><input type="radio" name="gender" id="genderFemale" value="女生"> 女生</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>職業</td>
-                    <td>
-                        <select id="occupation">
-                            <option selected disabled>請選擇職業</option>
-                            <option value="1">民意代表主管及經理人員</option>
-                            <option value="2">專業人員</option>
-                            <option value="3">技術員及助理專業人員</option>
-                            <option value="4">事務支援人員</option>
-                            <option value="5">服務及銷售工作人員</option>
-                            <option value="6">農林漁牧業生產人員</option>
-                            <option value="7">技藝有關工作人員</option>
-                            <option value="8">機械設備操作及組裝人員</option>
-                            <option value="9">基層技術工及勞力工</option>
-                            <option value="0">軍人</option>
-                        </select>
-                    </td>
-                </tr>
-                <!--  
-                <tr>
-                    <td>身份證字號</td>
-                    <td><input type="text" id="identityNumber" placeholder="(例如)A123456789" readonly/></td>
-                </tr>-->
-                <tr>
-                    <td>Email</td>
-                    <td><input type="email" id="email" placeholder="ex:abc@example.com"></td>
-                </tr>
-                <tr>
-                    <td>生日</td>
-                    <td><input type="date" id="birthDate" onkeydown="return false;"/></td>
-                </tr>
-            </table>
-            <button type="button" class="personal-button" onclick="updateUser()">編輯會員資料</button>
-        </form>
-    
-	</div>
+    @media (max-width: 768px) {
+        .form-row {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-row label {
+            text-align: left;
+            padding-right: 0;
+            margin-bottom: 5px;
+        }
+
+        .form-row input,
+        .form-row select {
+            width: 100%;
+            max-width: unset; /* 小螢幕取消最大寬度限制 */
+        }
+    }
+</style>
+    <div class="header">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+            <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
+        </svg>
+        會員資料
+    </div>
+<div class="container">
+
+    <form id="userForm">
+        <div class="form-row">
+            <label for="lastName">姓氏</label>
+            <input type="text" id="lastName" placeholder="ex:王">
+        </div>
+        <div class="form-row">
+            <label for="firstName">名字</label>
+            <input type="text" id="firstName" placeholder="ex:小明">
+        </div>
+        <div class="form-row">
+            <label>性別</label>
+            <div class="gender-group">
+                <label><input type="radio" name="gender" id="genderMale" value="男生" checked> 男生</label>
+                <label><input type="radio" name="gender" id="genderFemale" value="女生"> 女生</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="occupation">職業</label>
+            <select id="occupation">
+                <option selected disabled>請選擇職業</option>
+                <option value="1">民意代表主管及經理人員</option>
+                <option value="2">專業人員</option>
+                <option value="3">技術員及助理專業人員</option>
+                <option value="4">事務支援人員</option>
+                <option value="5">服務及銷售工作人員</option>
+                <option value="6">農林漁牧業生產人員</option>
+                <option value="7">技藝有關工作人員</option>
+                <option value="8">機械設備操作及組裝人員</option>
+                <option value="9">基層技術工及勞力工</option>
+                <option value="0">軍人</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="ex:abc@example.com">
+        </div>
+        <div class="form-row">
+            <label for="birthDate">生日</label>
+            <input type="date" id="birthDate" onkeydown="return false;">
+        </div>
+        <button type="button" class="personal-button" onclick="updateUser()">編輯會員資料</button>
+    </form>
+</div>
 </div>

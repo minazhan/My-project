@@ -61,11 +61,12 @@ table {
 .modal-content {
 	background-color: #fefefe;
 	margin: 15% auto;
-	padding: 20px;
+	padding: 15px;
 	border: 1px solid #888;
 	width: 50%;
-	text-align: center;
+	text-align: left;
 }
+
 
 /* 關閉按鈕 */
 .close {
@@ -74,6 +75,13 @@ table {
 	font-size: 28px;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+.modal {
+  z-index: 1050 !important;
 }
 </style>
 
@@ -115,8 +123,14 @@ table {
 							<td><a class="button-error pure-button"
 								href="/admin/user/delete/${userDto.userId}">刪除</a></td>
 							<td>
-								  <a class="button-darkgray pure-button"
-								href="/admin/user/detail/${userDto.userId}">用戶明細</a>
+								  <!--<a class="button-darkgray pure-button"
+								href="/admin/user/detail/${userDto.userId}">用戶明細</a>-->
+								
+								<!-- 點擊按鈕觸發 Modal -->
+			                    <button type="button" class="button-darkgray pure-button open-modal" data-id="${userDto.userId}">
+			                        用戶明細
+			                    </button>
+
 							</td>
 
 						</tr>
@@ -125,6 +139,27 @@ table {
 
 
 			</table>
+			
+			<!-- Bootstrap Modal 結構 -->
+			<div class="modal fade" id="userDetailModal" tabindex="-1" aria-labelledby="userDetailModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="userDetailModalLabel">用戶明細</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body" id="modalContent">
+			        <!-- 這裡的內容將由 AJAX 動態填充 -->
+			        <p>加載中...</p>
+			      </div>
+			      <div class="modal-footer d-flex justify-content-center">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >關閉</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+			
 		</fieldset>
 	</div>
 
@@ -160,6 +195,38 @@ table {
 
 			});
 		});
+		
+		
+		//當點擊「用戶明細」按鈕時，使用 AJAX 向後端發送請求
+		$(document).on('click', '.open-modal', function() {
+			 //e.stopPropagation(); // 防止事件冒泡
+			 //const userId = $(e.currentTarget).data('id'); // 使用 e.currentTarget
+			 const userId = $(this).data('id'); // 使用 `data-id` 獲取按鈕的值
+			 console.log('獲取的 userId:', userId, '類型:', typeof userId); // 打印獲取到的 userId
+
+		    // 發送 AJAX 請求到後端
+		    $.ajax({
+		        //url: `/admin/user/detail/${userId}`, //RESTful API，運行在舊版本的瀏覽器，無法正確解析
+		        url: '/admin/user/detail/' + userId, //使用這就可以執行了
+		        
+		        method: 'GET',
+		        beforeSend: function () {
+		        	
+		            console.log('請求的 URL:', `/admin/user/detail/${userId}`);
+		            console.log('請求的 URL:', '/admin/user/detail/' + userId);
+		        },
+		        success: function(data) {
+		            // 將返回的 HTML 內容填充到 Modal 中
+		            $('#modalContent').html(data);
+		            // 顯示 Modal
+		            $('#userDetailModal').modal('show');
+		        },
+		        error: function() {
+		            alert('無法加載用戶明細');
+		        }
+		    });
+		});
+
 		
 		
 

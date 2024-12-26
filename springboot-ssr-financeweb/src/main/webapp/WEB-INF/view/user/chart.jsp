@@ -17,6 +17,11 @@
 
     <!-- Styles -->
     <style>
+    
+    	body{
+    		background-color: #f0f2f5;
+    	}
+    
         #chartdiv, #chartdiv_form {
             width: 100%;
             height: 500px;
@@ -26,21 +31,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
         }
 
         .chart-container {
             flex: 1;
-            min-width: 50%;
-            height: 500px;
-            background-color: #f9f9f9;
+            max-width: 50%;
+            height: auto;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
         }
 
         .chart-title {
             text-align: center;
-            margin-bottom: 10px;
+            margin-top: 10px;
             font-size: 24px;
             font-weight: bold;
         }
@@ -51,7 +57,7 @@
 	<!-- menu bar include -->
 	<%@ include file="/WEB-INF/view/menu.jspf" %>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-between chart-wrapper">
             <!-- 第一個圖表 -->
             <div class="chart-container">
@@ -68,7 +74,8 @@
     </div>
 
     <!-- Chart code -->
-    <script>
+    <script> 
+    
     am5.ready(function() {
         // 第一個圖表
         var root = am5.Root.new("chartdiv");
@@ -115,6 +122,8 @@
         legend.data.setAll(series.dataItems);
 
         series.appear(1000, 100);
+        
+        root._logo.dispose();
 
         // 第二個圖表
         var rootForm = am5.Root.new("chartdiv_form");
@@ -158,7 +167,12 @@
         legendForm.data.setAll(seriesForm.dataItems);
 
         seriesForm.appear(1000, 100);
-    }); // end am5.ready()
+        
+        root._logo.dispose();
+        
+    });
+    
+    
     </script>
 
 </body>

@@ -11,6 +11,10 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    
+        body{
+    		background-color: #f0f2f5;
+    	}
         .container-fluid {
             max-width: 800px;
             margin: 0 auto;
@@ -83,18 +87,60 @@
             <!-- 股票清單 -->
             <div class="tab-pane fade show active" id="recommend" role="tabpanel" aria-labelledby="recommend-tab">
                 <h3 class="text-center mt-3">熱門股票清單</h3>
-                <div class=update_stock>
-                	<button class="btn btn-primary update-btn">更新</button>
+                <div class=update_stock style="display: flex; align-items: center; justify-content: space-between;">
+                	 <!-- 最新更新日期 -->
+            		<span style="margin-right: 20px; color: gray;">最近更新：${lastUpdated}</span>
+					<button class="btn btn-primary update-btn">更新</button>
 				</div>
                 <!-- 其餘股票列表 -->
                 <ul>
                     <c:forEach var="stock" items="${stockDtos}">
-                        <li><span>${stock.stockName} - 價格:${stock.price}, 成交量:${stock.volume}, 風險:${stock.riskLevel}</span></li>
+                       	<li style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+						     <!-- 左欄 -->
+							<div>
+							  	${stock.stockName} - 價格:${stock.price}, 成交量:${stock.volume}
+							</div>
+							 <!-- 右欄 -->
+							<div>
+							    風險:${stock.riskLevel}
+							</div>
+						</li>
                     </c:forEach>
                 </ul>
             </div>
         </div>
     </div>
+    
+    <script>
+	    document.querySelector(".update-btn").addEventListener("click", function () {
+	        const updateButton = this;
+	        updateButton.disabled = true; // 禁用按鈕避免多次點擊
+	        updateButton.textContent = "更新中...";
+	
+	        // 發送更新請求
+	        fetch("http://localhost:8081/stocks/update", {
+	            method: "GET",
+	        })
+	            .then(response => response.text())
+	            .then(message => {
+	                console.log(message); // 打印後端返回消息
+	                // 刷新整個頁面
+	                location.reload();
+	            })
+	            .catch(error => {
+	                console.error("更新失敗：", error);
+	                updateButton.textContent = "更新失敗";
+	                setTimeout(() => {
+	                    updateButton.disabled = false; // 重新啟用按鈕
+	                    updateButton.textContent = "更新";
+	                }, 3000);
+	            });
+	    });
+    
+    </script>
+    
+    
+    
 </body>
 
 </html>

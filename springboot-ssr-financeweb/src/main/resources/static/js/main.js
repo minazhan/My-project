@@ -23,12 +23,13 @@ function loadPage(pageUrl) {
 				let welcomeElement = document.querySelector('.welcome-message');
 				if (!welcomeElement) { // 防止重複插入
 					welcomeElement = document.createElement('div');
-					//welcomeElement.style.fontSize = '1.2rem';  修改字體大小
+					welcomeElement.style.fontSize = '1rem';  //修改字體大小
 					welcomeElement.className = 'welcome-message';
-					welcomeElement.innerHTML = `<h3>${userName},您好!</h3>`;
+					welcomeElement.innerHTML = `<h3>${userName} 您好</h3>`;
 					sidebarElement.prepend(welcomeElement); // 在 sidebar 的頂部插入
 				} else {
 					welcomeElement.innerHTML = `<h3>${userName},您好!</h3>`; // 如果已存在，更新內容
+					welcomeElement.style.fontSize = '1rem';
 				}
 			}
 
@@ -83,7 +84,7 @@ function initializeTransactionPage() {
 				datasets: [{
 					label: '總計',
 					data: [0, 0],
-					backgroundColor: ['#6cba6f ', '#e27246']
+					backgroundColor: ['#628acb ', '#ed9075']
 				}]
 			},
 			options: {
@@ -190,7 +191,8 @@ function initializeTransactionPage() {
 					"targets": -1, // 最後一欄
 					"orderable": false, // 禁用排序
 					"data": null,
-					"defaultContent": `<button class="delete-btn btn btn-danger btn-sm">刪除</button>`
+					"defaultContent": `<button class="delete-btn btn btn-danger btn-sm" 
+										style="color: #f05757; border: 1px solid #f05757; background-color: transparent;">刪除</button>`
 				}
 			]
 		});

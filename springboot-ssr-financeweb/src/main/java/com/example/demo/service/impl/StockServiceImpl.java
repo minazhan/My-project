@@ -28,10 +28,17 @@ public class StockServiceImpl implements StockService {
     private StockEntityMapper stockEntityMapper; //轉換
 
     public void updateStocks() {
+    	
+    	// 清空表並重置自增列，id就不會一直增加
+    	stockRepository.truncateTable();
+    	
         // 從資料庫獲取所有股票數據
         List<StockCodeEntity> stocks = stockCodeRepository.findAll();
+        
+        // 跳過第一筆資料，因第一筆從股票網站抓下來無法過濾
+        List<StockCodeEntity> stocksToProcess = stocks.subList(1, stocks.size());
 
-        for (StockCodeEntity stock : stocks) {
+        for (StockCodeEntity stock : stocksToProcess) {
             try {
                 // 根據成交量分類風險
                 String riskLevel = classifyRiskByVolume(stock.getVolume());

@@ -11,6 +11,20 @@
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    
+    	body{
+    		background-color: #f0f2f5;
+    	}
+    	
+        .header {
+        	padding: 15px 20px;
+        	text-align: center;
+        	font-size: 1.5rem;
+        	display: flex;
+        	align-items: center;
+        	justify-content: center;
+    	}
+    
         .container-fluid {
             max-width: 800px;
             margin: 0 auto;
@@ -78,6 +92,22 @@
 		.back-home:hover svg {
 		    fill: #5a84c3; /* 滑鼠懸停時的 SVG 顏色 */
 		}
+		
+		.card-body{
+		    background-color: #deeafc;
+            color: #1565c0; /* 深藍字體 */
+    		border: 1px solid #90caf9; /* 藍色邊框 */
+		}
+		
+		.card-text{
+			color: #0000008c;
+		}
+		
+		li{
+		    background-color: #deeafc;
+            color: #0000008c; /* 深藍字體 */
+    		/*border: 1px solid #90caf9;  藍色邊框 */
+		}
         
     </style>
 </head>
@@ -90,16 +120,20 @@
 	        	<span>回首頁</span>
 	        </a>
     
-        <div class="tab-content" id="myTabContent">
-
+	        <div class="header">
+		        熱門股票清單
+	    	</div>
+	    	
+		<div class="tab-content" id="myTabContent">
+		
             <!-- 股票清單 -->
             <div class="tab-pane fade show active" id="recommend" role="tabpanel" aria-labelledby="recommend-tab">
-                <h3 class="text-center mt-3">熱門股票清單</h3>
+                <!--<h3 class="text-center mt-3">熱門股票清單</h3>-->
                 <div class="row">
                     <!-- Top 3 股票 -->
                     <c:forEach var="stock" items="${topStocks}" varStatus="status">
                         <div class="col-md-4">
-                            <h5>Top${status.index + 1}</h5>
+                            <h5 style="color: #f9483b">Top${status.index + 1}</h5>
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">${stock.stockName}</h5>

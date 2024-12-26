@@ -29,6 +29,10 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
     private static final String VOLUME_RANK_URL = "https://tw.stock.yahoo.com/tw-etf/volume";
 
     public void fetchTopVolumeStocks() {
+    	
+    	// 清空表並重置自增列
+    	stockCodeRepository.truncateTable();
+    	
         try {
             // 連接到 Yahoo 股市的成交量排行榜頁面
             Document document = Jsoup.connect(VOLUME_RANK_URL).get();
@@ -36,19 +40,19 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
             // 找到包含股票資料的所有 <li> 標籤
             Elements stockRows = document.select("ul > li");
             
-         // 移除第一筆資料
-            if (!stockRows.isEmpty()) {
-                stockRows.remove(0);
-            }
+            // 移除第一筆資料
+//            if (!stockRows.isEmpty()) {
+//                stockRows.remove(0);
+//            }
 
-//            boolean isFirstRow = true; // 用於標記第一筆資料
+            boolean isFirstRow = true; // 用於標記第一筆資料
             for (Element row : stockRows) {
                 try {
                 	
-//                    if (isFirstRow) {
-//                        isFirstRow = false; // 標記第一筆資料已處理
-//                        continue; // 跳過第一筆資料
-//                    }
+                    if (isFirstRow) {
+                        isFirstRow = false; // 標記第一筆資料已處理
+                        continue; // 跳過第一筆資料
+                    }
                 	
                     // 獲取股票代碼，並去掉 .TW 後綴
                     String stockSymbol = row.select("span").stream()

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.dto.UserDto;
 import com.example.demo.model.dto.UserRiskResponseDto;
 import com.example.demo.response.ApiResponse;
@@ -37,7 +40,7 @@ import jakarta.validation.Valid;
  * POST   /admin/user/update/{userId} 完整修改使用者
  * GET    /admin/user/delete/{userId} 刪除使用者
  * 
- * GET    /admin/user/detail/{userId} 顯示用戶明細(使用rest)
+ * GET    /admin/user/detail/{userId} 顯示用戶明細(JSP 作為部分頁面（為 Modal 內容）)
  * --------------------------------------------------------------------
  * */
 
@@ -112,25 +115,34 @@ public class UserController {
 //		model.addAttribute("message", e.getMessage());
 //		return "error";//將錯誤訊息傳給error.jsp
 //	}
+
 	
-	
-	
-	//顯示用戶明細，會傳回JSON格式
-//	@GetMapping("/detail/{userId}")
-//	@ResponseBody
-//	public ResponseEntity<ApiResponse<Map<String, Object>>> getUserDetails(@PathVariable Integer userId){
-//		
-//		UserDto userDto = userService.getUserById(userId);
-//		UserRiskResponseDto userRiskResponseDto = userRiskResponseService.getUserById(userId);
-//		
-//		
-//		//使用 Map 封裝返回數據
-//	    Map<String, Object> responseData = new HashMap<>();
-//	    responseData.put("UserId", userDto.getUserId());
-//	    responseData.put("BirthDate", userDto.getBirthDate());
-//	    responseData.put("RiskType", userRiskResponseDto.getRiskType());
-//	    
-//	    return ResponseEntity.ok(ApiResponse.success("查詢成功",responseData));
-//	}
+	@GetMapping("/detail/{userId}")
+    public String getUserDetail(@PathVariable Integer userId, Model model) {
+        // 模擬查詢用戶數據
+        UserDto user = userService.getUserById(userId);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+
+        //查詢子表數據
+        //拋出了 UserNotFoundException，程序會進入 catch 塊進行處理
+        //因為我在UserRiskResponseService，會拋出UserNotFoundException
+        UserRiskResponseDto userResponse;
+        try {
+            userResponse = userRiskResponseService.getUserById(userId);
+        } catch (UserNotFoundException e) {
+            userResponse = new UserRiskResponseDto();
+            userResponse.setRiskType("無風險評估");
+            userResponse.setTotalScore(0);
+        }
+        
+        // 將數據放入模型，供 JSP 使用
+        model.addAttribute("user", user);
+        model.addAttribute("userResponse", userResponse);
+
+        // 返回 JSP 視圖名稱
+        return "user/userDetailFragment"; // 對應 /WEB-INF/views/userDetailFragment.jsp
+    }
 
 }
