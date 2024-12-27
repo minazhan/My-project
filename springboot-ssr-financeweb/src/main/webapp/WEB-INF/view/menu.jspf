@@ -35,7 +35,7 @@
 	            <a href="/"  style="color: #ffe6e6;">回首頁</a>
 	            <a href="/admin/users" style="color: #ffe6e6;">用戶管理</a>
 	            <a href="/admin/charts" style="color: #ffe6e6;" >資料圖表</a>
-	            <a href="/stocks/user_stock_list" style="color: #ffe6e6;" >股票列表管理</a>
+	            <a href="/admin/stocks/user_stock_list" style="color: #ffe6e6;" >股票列表管理</a>
 	        </div>    
             <!-- logout點擊重導到 成功登出會有其他按鈕供選擇 -->
             <a href="/logout" style="float: right;">

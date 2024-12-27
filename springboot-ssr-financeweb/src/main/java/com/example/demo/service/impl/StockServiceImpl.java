@@ -57,7 +57,7 @@ public class StockServiceImpl implements StockService {
     private String classifyRiskByVolume(Long volume) {
         if (volume == null || volume == 0L) return "未知風險";
         if (volume < 10000) return "低風險";
-        if (volume < 100000) return "中風險";
+        if (volume < 50000) return "中風險";
         return "高風險";
     }
 

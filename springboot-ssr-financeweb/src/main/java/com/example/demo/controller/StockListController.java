@@ -23,7 +23,7 @@ import com.example.demo.service.StockService;
 import com.example.demo.service.YahooFinanceCrawlerService;
 
 @Controller
-@RequestMapping("/stocks")
+@RequestMapping
 public class StockListController {
 	
 	//用於抓取資料庫資料
@@ -34,7 +34,7 @@ public class StockListController {
 	@Autowired
 	private StockService stockService;
 	
-	@GetMapping("/user_stock_list")
+	@GetMapping("/admin/stocks/user_stock_list")
 	public String getStockEntity(Model model,@ModelAttribute StockDto stockDto) {
 		List<StockDto> stockDtos = stockService.getAllStocks();
 		
@@ -68,7 +68,7 @@ public class StockListController {
 		return "user/user_stock_list";
 	}
 	
-	@GetMapping("/stock_list")
+	@GetMapping("/stocks/stock_list")
 	public String  getStockCodeEntityList(Model model,@ModelAttribute StockCodeDto stockCodeDto) {
 		List<StockCodeDto> stockCodeDtos = yahooFinanceCrawlerService.getAllStocks();
 		// 分出前三名和剩下七個股票

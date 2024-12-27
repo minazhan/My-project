@@ -54,13 +54,13 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
                         continue; // 跳過第一筆資料
                     }
                 	
-                    // 獲取股票代碼，並去掉 .TW 後綴
+                    // 獲取股票代碼，並去掉後綴
                     String stockSymbol = row.select("span").stream()
                             .filter(span -> span.text().endsWith(".TW") || span.text().endsWith(".TWO"))
-                            .map(span -> span.text().replace(".TW", "").replace(".TWO", ""))
+                            .map(span -> span.text().replaceAll("\\.(TW|TWO)$", "")) // 使用正則表達式同時匹配 .TW 和 .TWO
                             .findFirst()
                             .orElse("未知代碼");
-
+ 
                     // 獲取股票詳細頁的連結
                     String stockLink = row.select("a[href]").attr("href");
                     if (!stockLink.startsWith("https://")) {
