@@ -23,12 +23,12 @@ function loadPage(pageUrl) {
 				let welcomeElement = document.querySelector('.welcome-message');
 				if (!welcomeElement) { // 防止重複插入
 					welcomeElement = document.createElement('div');
-					welcomeElement.style.fontSize = '1rem';  //修改字體大小
+					welcomeElement.style.fontSize = '0.5rem';  //修改字體大小
 					welcomeElement.className = 'welcome-message';
 					welcomeElement.innerHTML = `<h3>${userName} 您好</h3>`;
 					sidebarElement.prepend(welcomeElement); // 在 sidebar 的頂部插入
 				} else {
-					welcomeElement.innerHTML = `<h3>${userName},您好!</h3>`; // 如果已存在，更新內容
+					welcomeElement.innerHTML = `<h3>${userName} 您好</h3>`; // 如果已存在，更新內容
 					welcomeElement.style.fontSize = '1rem';
 				}
 			}
@@ -246,8 +246,10 @@ function initializeTransactionPage() {
                             <label for="date">日期：</label>
                             <input type="date" id="date" value="${new Date().toISOString().split('T')[0]}" style="padding: 5px;" />
                         </div>
-                        <button id="submitEntryBtn" style="margin-left: auto; height: 40px;">OK</button>
-                    </div>
+						<div class="form-group" style="display: flex; align-items: center;">
+							<button id="submitEntryBtn" style="margin-left: auto; height: auto; background-color: #6ab06d; color: white; border: none; border-radius: 5px; cursor: pointer;transition: background-color 0.3s ease;">OK</button>
+						</div>
+					</div>
                     `);
 
 					// $('#submitEntryBtn').css({
@@ -465,7 +467,12 @@ function initializeTransactionPage() {
 		                <td>${transaction.transactionDate.split('T')[0]}</td> <!-- 格式化日期 -->
 		                <td>${transaction.expense}</td>
 						<td>
-						   	<button class="delete-btn btn btn-danger btn-sm" data-id="${transaction.transactionId}">刪除</button>
+						   	<button class="delete-btn btn btn-danger btn-sm" data-id="${transaction.transactionId}" 
+									style="						
+									background-color: #ffd6d6;
+						            color: #c01515; 
+						    		border: 1px solid #f99090; 
+						    		border-radius: 5px;";>刪除</button>
 						</td>
 		            </tr>
 		        `;

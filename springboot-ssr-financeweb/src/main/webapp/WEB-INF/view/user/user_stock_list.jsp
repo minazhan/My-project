@@ -86,7 +86,7 @@
         <div class="tab-content" id="myTabContent">
             <!-- 股票清單 -->
             <div class="tab-pane fade show active" id="recommend" role="tabpanel" aria-labelledby="recommend-tab">
-                <h3 class="text-center mt-3">熱門股票清單</h3>
+                <h3 class="text-center mt-3" style="font-weight:bold; color:#0000008c; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">熱門股票清單</h3>
                 <div class=update_stock style="display: flex; align-items: center; justify-content: space-between;">
                 	 <!-- 最新更新日期 -->
             		<span style="margin-right: 20px; color: gray;">最近更新：${lastUpdated}</span>

@@ -35,7 +35,11 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
     	
         try {
             // 連接到 Yahoo 股市的成交量排行榜頁面
-            Document document = Jsoup.connect(VOLUME_RANK_URL).get();
+            Document document = Jsoup.connect(VOLUME_RANK_URL)
+            		// 模擬瀏覽器請求，設置 User-Agent
+            		.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.89 Safari/537.36") // 模擬 Chrome 瀏覽器
+                    .timeout(10000) // 設置超時時間
+            		.get();
 
             // 找到包含股票資料的所有 <li> 標籤
             Elements stockRows = document.select("ul > li");

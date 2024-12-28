@@ -37,7 +37,12 @@ function initializeRecommendationsPage() {
                                     成交量: ${stock.volume}<br>
                                 </p>
                                 <div class="detailBtn">
-                                    <a href="https://tw.stock.yahoo.com/quote/${stock.stockSymbol}" target="_blank" class="btn btn-success" style="background-color:#469872;">詳細資料</a>
+                                    <a href="https://tw.stock.yahoo.com/quote/${stock.stockSymbol}" target="_blank" class="btn btn-success" 
+									style="background-color:#def7d2;
+									color: #15c032;
+								    border: #28a745;
+								    font-weight: bold;
+								    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)">詳細資料</a>
                                 </div>
                             </div>
                         </div>

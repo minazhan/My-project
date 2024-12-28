@@ -149,9 +149,10 @@
         <img src="${pageContext.request.contextPath}/img/pig_6.jpg" class="full-width-image" alt="..." style="height: auto;">
 
         <!-- 疊加在圖片上的文字 -->
+        
         <div class="overlay-content position-absolute w-100" style="top: 50%; left: 50%; transform: translate(-50%, -50%); color: 635c4d;" style="font-size: 67%;">
-            <h2>提供您個人化的理財服務</h2>
-            <h3>
+            <h2 style="font-weight: bold;  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">提供您個人化的理財服務</h2>
+            <h3 style="font-weight: bold;">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
                 馬上註冊
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
@@ -166,38 +167,36 @@
 
 
     <!-- Offcanvas 組件，用於左側滑出菜單 -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color: #f0f2f5; font-weight: bold;">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <!-- 搜尋框 -->
-            <div class="input-group mb-3"> <!-- 將搜尋欄合併一起 -->
-                <input type="text" class="form-control" placeholder="Search...">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+            <!-- <div class="input-group mb-3"> --> <!-- 將搜尋欄合併一起 -->
+                <!-- <input type="text" class="form-control" placeholder="Search..."> -->
+                <!-- <button class="btn btn-primary" type="button"> -->
+                    <!-- <i class="fas fa-search"></i> -->
+                <!-- </button> -->
+            <!-- </div> -->
             <!-- 導覽選單 -->
             <ul class="navbar-nav">
-                <li><a class="nav-link" href="/">首頁</a></li>
-                <li><a class="nav-link" href="#aboutUs" onclick="scrollToAboutUs()">關於我們</a></li>
-                <li><a class="nav-link" href="/stocks/stock_list">股票清單</a></li>
+                <li><a class="nav-link" href="/" style="color: #6579b9;">首頁</a></li>
+                <li><a class="nav-link" href="#aboutUs" onclick="scrollToAboutUs()" style="color: #6579b9;">關於我們</a></li>
+                <li><a class="nav-link" href="/stocks/stock_list" style="color: #6579b9;">股票清單</a></li>
             	<li class="nav-item">
                     <c:if test="${role == 'USER'}">
-                        <a class="nav-link" href="/index.html">個人頁面</a>
-                        <!-- <button onclick="window.location. href="/index.html">個人頁面</button> -->
+                        <a class="nav-link" href="/index.html" style="color: #6579b9;">個人頁面</a>
                     </c:if>
                 </li>
                 <li class="nav-item">
                     <c:if test="${role == 'ADMIN'}">
-                        <a class="nav-link" href="/admin/users">後臺登入</a>
-                        <!--  <button onclick="window.location. href="/admin/users">後臺登入</button>-->
+                        <a class="nav-link" href="/admin/users" style="color: #6579b9;">後臺登入</a>
                     </c:if>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">登出</a>
+                    <a class="nav-link" href="/logout" style="color: #6579b9;">登出</a>
                 </li>
             </ul>
         </div>
@@ -229,7 +228,7 @@
         <h1 class="text-center">滾動以查看導覽列變化</h1>-->
 
         <div class="container my-5 custom-padding" style="width: 70%;">
-            <h2 style="text-align: center;">
+            <h2 style="text-align: center; font-weight:bold; color:#0000008c; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
                 系統特點
             </h2>
             <div class="row ">
@@ -266,7 +265,7 @@
     <!--</div>-->
 
 	<div id="aboutUs" class="container py-5" style="width: 70%; text-align: center;">
-		<h2>關於我們</h2>
+		<h2 style="font-weight:bold; color:#0000008c; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">關於我們</h2>
 		<p>致力於打造一個專屬於您的個人理財推薦系統，協助使用者輕鬆管理日常財務。<br>
 		透過簡單直觀的介面，您可以自行記錄收入與支出，清楚掌握個人財務狀況。<br>
 		系統將根據您的紀錄與風險偏好，量身打造的理財建議，讓理財變得更高效、更貼近需求。<br>

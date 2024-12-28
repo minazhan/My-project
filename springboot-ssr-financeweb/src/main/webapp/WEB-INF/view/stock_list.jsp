@@ -23,6 +23,9 @@
         	display: flex;
         	align-items: center;
         	justify-content: center;
+        	font-weight:bold; 
+        	color:#0000008c; 
+        	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     	}
     
         .container-fluid {

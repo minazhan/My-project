@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.exception.UserException;
@@ -18,6 +19,7 @@ import com.example.demo.model.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import com.example.demo.util.Hash;
+import com.example.demo.util.PasswordUtil;
 
 //service實作
 @Service
@@ -131,22 +133,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User addRegistrationUser(UserRegistrationDto userRegistrationDto) {
-		String salt = Hash.getSalt(); // 得到隨機鹽
-		//把密碼加上鹽
-		String newPasswordHash = Hash.getHash(userRegistrationDto.getHashedPassword(), salt); 
-		Boolean action = false; // email 尚未驗證成功
-		
-		// 使用DTO資料來建立User實體物件
-		User user = userRegistrationMapper.toEntity(userRegistrationDto);
-		
-		// 設置加密後的密碼和鹽到 User 實體中
-	    user.setHashedPassword(newPasswordHash);
-	    user.setPasswordSalt(salt); // 確保 User 實體中有 passwordSalt 這個屬性
-		
-		// 將使用者資料存入資料庫
-		userRepository.save(user);
-		
-		//返回保存後的user對象
+	    // 使用 BCryptPasswordEncoder 進行加密
+	    String rawPassword = userRegistrationDto.getHashedPassword(); // 從 DTO 獲取原始密碼
+	    String hashedPassword = PasswordUtil.encodePassword(rawPassword);  // 使用 BCrypt 進行加密
+
+	    // 使用 DTO 資料來建立 User 實體物件
+	    User user = userRegistrationMapper.toEntity(userRegistrationDto);
+
+	    // 設置加密後的密碼到 User 實體中
+	    user.setHashedPassword(hashedPassword);
+
+	    // 將使用者資料存入資料庫
+	    userRepository.save(user);
+
+	    // 返回保存後的 User 對象
 	    return user;
 
 				
