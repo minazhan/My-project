@@ -12,6 +12,6 @@ import com.example.demo.model.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer>{ //User: Entity, Integer: @Id 的型別
 
 	
-	// 根據 email 查找用戶
+	//根據 email 查找用戶
     Optional<User> findByEmail(String email);
 }
