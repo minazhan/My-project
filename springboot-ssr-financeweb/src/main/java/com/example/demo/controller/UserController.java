@@ -59,10 +59,7 @@ public class UserController {
 	@GetMapping
 	public String getUsers(Model model,@ModelAttribute UserDto userDto) {
 		List<UserDto> userDtos = userService.getAllUsers();
-			//List<UserDto> userDtos = new ArrayList<>();
-			//用於檢查資料有沒有送到jsp裡
-			//userDtos.add(new UserDto(1, "小明",  "王", "男", new Date(),"Engineer","john.doe@example.com" ));
-	        //userDtos.add(new UserDto(2, "小芳", "陳", "女", new Date(),"Designer", "jane.smith@example.com"));
+		
 	        // 添加日誌檢查
 	        System.out.println("UserDtos size: " + userDtos.size());
         model.addAttribute("userDtos", userDtos);
@@ -86,7 +83,7 @@ public class UserController {
 	@GetMapping("/delete/{userId}")
 	public String deleteUser(@PathVariable("userId") Integer userId) {
 		userService.deleteUser(userId);
-		return "redirect:/admin/users"; // 重導到 /users 頁面
+		return "redirect:/admin/users"; //重導到 /users 頁面
 	}
 	
 	//修改使用者資料(由使用者修改)，把資料帶到修改頁面
@@ -101,12 +98,12 @@ public class UserController {
 	//修改頁面
 	@PostMapping("/update/{userId}")
 	public String updateUser(@PathVariable Integer userId, @Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
-		if(bindingResult.hasErrors()) { // 若有錯誤發生
-			model.addAttribute("userDto", userDto); // ◇◇◇重要 將原本的 userDto 回傳
-			return "user/user_update"; // 會自動將錯誤訊息傳給 jsp
+		if(bindingResult.hasErrors()) { //若有錯誤發生
+			model.addAttribute("userDto", userDto); //◇◇◇重要 將原本的 userDto 回傳
+			return "user/user_update"; //會自動將錯誤訊息傳給 jsp
 		}
 		userService.updateUser(userId, userDto);
-		return "redirect:/admin/users"; // 重導到 /users 頁面
+		return "redirect:/admin/users"; //重導到 /users 頁面
 	}
 	
 	//處理錯誤
@@ -118,11 +115,11 @@ public class UserController {
 
 	
 	@GetMapping("/detail/{userId}")
-    public String getUserDetail(@PathVariable Integer userId, Model model) {
-        // 模擬查詢用戶數據
-        UserDto user = userService.getUserById(userId);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+    	public String getUserDetail(@PathVariable Integer userId, Model model) {
+	        //模擬查詢用戶數據
+	        UserDto user = userService.getUserById(userId);
+	        if (user == null) {
+	            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
         //查詢子表數據
@@ -137,12 +134,12 @@ public class UserController {
             userResponse.setTotalScore(0);
         }
         
-        // 將數據放入模型，供 JSP 使用
+        //將數據放入模型，供 JSP 使用
         model.addAttribute("user", user);
         model.addAttribute("userResponse", userResponse);
 
-        // 返回 JSP 視圖名稱
-        return "user/userDetailFragment"; // 對應 /WEB-INF/views/userDetailFragment.jsp
+        //返回 JSP 視圖名稱
+        return "user/userDetailFragment"; //對應 /WEB-INF/views/userDetailFragment.jsp
     }
 
 }
