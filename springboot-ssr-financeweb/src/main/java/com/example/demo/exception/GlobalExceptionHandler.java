@@ -12,10 +12,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleException(Exception e) {
-        // 日誌記錄異常
+        //日誌記錄異常
         e.printStackTrace();
 
-        // 返回通用錯誤響應
+        //返回通用錯誤響應
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ApiResponse.error(500, "伺服器發生錯誤，請稍後再試"));
     }
