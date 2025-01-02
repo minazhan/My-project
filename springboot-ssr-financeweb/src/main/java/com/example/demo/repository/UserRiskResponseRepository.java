@@ -11,7 +11,7 @@ import com.example.demo.model.entity.UserRiskResponse;
 @Repository
 public interface UserRiskResponseRepository extends JpaRepository<UserRiskResponse, Integer>{
 
-	// 根據 userId 查詢對應的 riskType
-    @Query("SELECT u.riskType FROM UserRiskResponse u WHERE u.userId = :userId")
-    String findRiskTypeByUserId(@Param("userId") Integer userId);
+	//根據 userId 查詢對應的 riskType
+    	@Query("SELECT u.riskType FROM UserRiskResponse u WHERE u.userId = :userId")
+    	String findRiskTypeByUserId(@Param("userId") Integer userId);
 }
