@@ -21,14 +21,14 @@ public class CalculateBalancelmpl implements CalculateBalance{
 	public BigDecimal calculateBalance(Integer userId) {
 		
 		LocalDate now = LocalDate.now();
-	    int currentMonth = now.getMonthValue();
-	    int currentYear = now.getYear();
+	    	int currentMonth = now.getMonthValue();
+	    	int currentYear = now.getYear();
 
 	    List<Transaction> transactions = transactionRepository.findByUserIdAndDate(userId, currentMonth, currentYear);
 
 	    BigDecimal totalIncome = transactions.stream()
 	        .filter(t -> "income".equals(t.getTransactionType()))
-	        .map(t -> BigDecimal.valueOf(t.getExpense()))  // 將 Float 轉為 BigDecimal
+	        .map(t -> BigDecimal.valueOf(t.getExpense()))  //將 Float 轉為 BigDecimal
 	        .reduce(BigDecimal.ZERO, BigDecimal::add);
 
 	    BigDecimal totalExpense = transactions.stream()
