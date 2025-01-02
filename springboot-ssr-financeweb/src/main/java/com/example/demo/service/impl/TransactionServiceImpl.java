@@ -25,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService{
 	
 	//用於連動User表的user_id
 	@Autowired
-    private UserRepository userRepository;
+    	private UserRepository userRepository;
 	
 	//entity和dto轉換
 	@Autowired
@@ -40,7 +40,7 @@ public class TransactionServiceImpl implements TransactionService{
 			throw new TransactionNotFoundException("新增失敗: " + transactionDto.getTransactionId() + " 已存在");
 		}
 		
-		// 根據 userId 查詢對應的 User 實體
+		//根據 userId 查詢對應的 User 實體
 		Optional<User>  optUser = userRepository.findById(transactionDto.getUserId());
 		User user = optUser.orElseThrow(() ->  new RuntimeException("新增失敗: " + transactionDto.getUserId() + "User 不存在"));
 		
@@ -48,10 +48,10 @@ public class TransactionServiceImpl implements TransactionService{
 		//手動將 DTO 映射到實體	
 		Transaction transaction = new Transaction();
 		transaction.setUser(user); // 關聯 User
-        transaction.setTransactionDate(transactionDto.getTransactionDate());
-        transaction.setTransactionType(transactionDto.getTransactionType());
-        transaction.setExpense(transactionDto.getExpense());
-        transaction.setCategory(transactionDto.getCategory());
+	        transaction.setTransactionDate(transactionDto.getTransactionDate());
+	        transaction.setTransactionType(transactionDto.getTransactionType());
+	        transaction.setExpense(transactionDto.getExpense());
+	        transaction.setCategory(transactionDto.getCategory());
 		
 		//Transaction transaction = transactionMapper.toEntity(transactionDto); //把資料轉換entity
 		
@@ -80,7 +80,6 @@ public class TransactionServiceImpl implements TransactionService{
 	//查詢該使用者的所有交易
 	@Override
 	public List<TransactionDto> getTransactionsByUserId(Integer userId) {
-		
 		return transactionRepository.findByUserId(userId)
 				.stream()
 				.map(transaction -> transactionMapper.toDto(transaction))
