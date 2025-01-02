@@ -30,72 +30,67 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
 
     public void fetchTopVolumeStocks() {
     	
-    	// 清空表並重置自增列
+    	//清空表並重置自增列
     	stockCodeRepository.truncateTable();
     	
         try {
-            // 連接到 Yahoo 股市的成交量排行榜頁面
+            //連接到 Yahoo 股市的成交量排行榜頁面
             Document document = Jsoup.connect(VOLUME_RANK_URL)
-            		// 模擬瀏覽器請求，設置 User-Agent
+            		//模擬瀏覽器請求，設置 User-Agent
             		.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.89 Safari/537.36") // 模擬 Chrome 瀏覽器
-                    .timeout(10000) // 設置超時時間
+                    .timeout(10000) //設置超時時間
             		.get();
 
-            // 找到包含股票資料的所有 <li> 標籤
+            //找到包含股票資料的所有 <li> 標籤
             Elements stockRows = document.select("ul > li");
-            
-            // 移除第一筆資料
-//            if (!stockRows.isEmpty()) {
-//                stockRows.remove(0);
-//            }
 
-            boolean isFirstRow = true; // 用於標記第一筆資料
+            boolean isFirstRow = true; //用於標記第一筆資料
             for (Element row : stockRows) {
                 try {
                 	
                     if (isFirstRow) {
-                        isFirstRow = false; // 標記第一筆資料已處理
-                        continue; // 跳過第一筆資料
+                        isFirstRow = false; //標記第一筆資料已處理
+                        continue; //跳過第一筆資料
                     }
                 	
-                    // 獲取股票代碼，並去掉後綴
+                    //獲取股票代碼，並去掉後綴
                     String stockSymbol = row.select("span").stream()
                             .filter(span -> span.text().endsWith(".TW") || span.text().endsWith(".TWO"))
-                            .map(span -> span.text().replaceAll("\\.(TW|TWO)$", "")) // 使用正則表達式同時匹配 .TW 和 .TWO
+                            .map(span -> span.text().replaceAll("\\.(TW|TWO)$", "")) //使用正則表達式同時匹配 .TW 和 .TWO
                             .findFirst()
                             .orElse("未知代碼");
  
-                    // 獲取股票詳細頁的連結
+                    //獲取股票詳細頁的連結
                     String stockLink = row.select("a[href]").attr("href");
                     if (!stockLink.startsWith("https://")) {
-                        stockLink = "https://tw.stock.yahoo.com" + stockLink; // 添加主域名
+                        stockLink = "https://tw.stock.yahoo.com" + stockLink; //添加主域名
                     }
 
-                    // 進入股票詳細頁抓取名稱
+                    //進入股票詳細頁抓取名稱
                     String stockName = fetchStockNameFromDetailPage(stockLink);
 
-                    // 獲取成交量，確保只抓取 class="Jc(fe)" 的特定 <span>
+                    //獲取成交量，確保只抓取 class="Jc(fe)" 的特定 <span>
                     String volumeText = row.select("span.Jc\\(fe\\)").stream()
-                            .reduce((first, last) -> last) // 獲取最後一個符合條件的<span>
+                            .reduce((first, last) -> last) //獲取最後一個符合條件的<span>
                             .map(Element::text)
                             .orElse("0"); // 如果抓不到，返回 "0"
 
                     Long volume = parseVolume(volumeText);
 
                     
-                 // 獲取價格，確保只抓取 class="Jc(fe) Fw(600) D(f) Ai(c) C($c-trend-down)" 的特定 <span>
+                 //獲取價格，確保只抓取 class="Jc(fe) Fw(600) D(f) Ai(c) C($c-trend-down)" 的特定 <span>
                     String priceText = row.select("span.Jc\\(fe\\).Fw\\(600\\)").stream()
-                            .filter(span -> span.parent().className().contains("Miw(80px)")) // 限定父容器
+                            .filter(span -> span.parent().className().contains("Miw(80px)")) //限定父容器
                             .map(Element::text)
                             .findFirst()
-                            .orElse("0"); // 如果抓不到，預設為 "0"
+                            .orElse("0"); //如果抓不到，預設為 "0"
 
-                    // 將價格轉換為 Double
+                    //將價格轉換為 Double
                     Double price = parsePrice(priceText);
 
                     
 
-                    // 保存到資料庫
+                    //保存到資料庫
                     saveStockData(stockSymbol, stockName, volume,price);
                 } catch (Exception e) {
                     System.err.println("解析股票數據失敗: " + e.getMessage());
@@ -108,7 +103,7 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
         }
     }
 
-    // 進入股票詳細頁面抓取 <h1> 中的名稱
+    //進入股票詳細頁面抓取 <h1> 中的名稱
     private String fetchStockNameFromDetailPage(String stockLink) {
         try {
             Document detailPage = Jsoup.connect(stockLink).get();
@@ -120,21 +115,21 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
         }
     }
 
-    // 將成交量字串轉換為 Long
+    //將成交量字串轉換為 Long
     private Long parseVolume(String volumeText) {
         try {
-            // 去掉可能的逗號，例如 "124,240" -> "124240"
+            //去掉可能的逗號，例如 "124,240" -> "124240"
             return Long.parseLong(volumeText.replace(",", ""));           
         } catch (NumberFormatException e) {
-            return 0L; // 如果解析失敗，返回 0
+            return 0L; //如果解析失敗，返回 0
         }
     }
     
     
-    // 將價格字串轉換為 Double
+    //將價格字串轉換為 Double
     private Double parsePrice(String priceText) {
         try {
-            // 去掉逗號和空白，確保格式正確
+            //去掉逗號和空白，確保格式正確
             return Double.parseDouble(priceText.trim().replace(",", ""));
         } catch (NumberFormatException e) {
             System.err.println("價格轉換失敗：" + priceText);
@@ -142,9 +137,9 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
         }
     }
 
-    // 保存股票數據到資料庫
+    //保存股票數據到資料庫
     private void saveStockData(String stockSymbol, String stockName, Long volume,Double price) {
-        // 檢查是否已存在該股票代碼
+        //檢查是否已存在該股票代碼
         if (stockCodeRepository.findByStockSymbol(stockSymbol).isEmpty()) {
             StockCodeEntity stockCodeEntity = new StockCodeEntity();
             stockCodeEntity.setStockSymbol(stockSymbol);
@@ -158,7 +153,7 @@ public class YahooFinanceCrawlerServiceImpl implements YahooFinanceCrawlerServic
         }
     }
 
-    //查詢所有股票資料
+    	//查詢所有股票資料
 	@Override
 	public List<StockCodeDto> getAllStocks() {
 		return stockCodeRepository.findAll()
