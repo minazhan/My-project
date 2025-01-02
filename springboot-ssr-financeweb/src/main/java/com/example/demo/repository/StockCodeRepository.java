@@ -15,10 +15,6 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface StockCodeRepository extends JpaRepository<StockCodeEntity, Long> {
-    
-    // 查詢所有股票代碼
-//    @Query("SELECT s.stockSymbol FROM StockCodeEntity s")
-//    List<String> findAllSymbols();
 
     // 根據股票代碼查詢
     @Query("SELECT s FROM StockCodeEntity s WHERE s.stockSymbol = :stockSymbol")
