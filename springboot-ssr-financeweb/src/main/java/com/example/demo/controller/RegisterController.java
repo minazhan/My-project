@@ -23,16 +23,16 @@ public class RegisterController {
 	@Autowired
 	private UserService userService;
 	
-	// 顯示註冊頁面
+	//顯示註冊頁面
 	@GetMapping
 	public String registerPage(Model model) {
 		model.addAttribute("userRegistrationDto", new UserRegistrationDto());
         return "register"; // 導向註冊頁面 JSP（例如 register.jsp）
 	}
 	
-	// 處理註冊提交
-    @PostMapping
-    public String handleRegister(@Valid @ModelAttribute("userRegistrationDto") UserRegistrationDto userRegistrationDto, BindingResult bindingResult, Model model) {
+	//處理註冊提交
+    	@PostMapping
+    	public String handleRegister(@Valid @ModelAttribute("userRegistrationDto") UserRegistrationDto userRegistrationDto, BindingResult bindingResult, Model model) {
     	if (bindingResult.hasErrors()) {
     	    bindingResult.getAllErrors().forEach(error -> {
     	        System.out.println("驗證錯誤: " + error.getDefaultMessage());
@@ -48,15 +48,7 @@ public class RegisterController {
     	if ("ADMIN".equals(userRegistrationDto.getRole())) {
     		return "redirect:/login";
 		}
-    	return "redirect:/form?userId=" + user.getUserId(); // 註冊成功後可以導向表單頁面或其他頁面
+    	return "redirect:/form?userId=" + user.getUserId(); //註冊成功後可以導向表單頁面或其他頁面
     }
-    
-//    if (bindingResult.hasErrors()) {
-//        // 如果有驗證錯誤，返回註冊頁面
-//    	System.out.println("有錯誤");
-//        return "register";
-//    }
-    
-    
 
 }
