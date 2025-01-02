@@ -91,22 +91,13 @@ body {
 	/* min-height: 100vh; */
 	/* padding-bottom: 60px; 確保內容不被 Footer 覆蓋，值可以根據 Footer 的高度調整 */
 }
-
-/* .container {
-            width: 100%;
-    max-width: 600px;
-    margin: 100px auto;
-    
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        } */
-        
-            .btn{
+  
+.btn{
         background-color: rgba(90, 132, 195, 1);
         float: right;
         border: none;
-    }
+}
+
 .footer {
 	position: relative;
 	bottom: 0;
@@ -141,11 +132,12 @@ p {
 	margin: 0px;
 }
 
-        .brand-logo{
-            width: 150px;
-            height: 60px;
-            object-fit: contain;
-        }
+.brand-logo{
+       width: 150px;
+	height: 60px;
+	object-fit: contain;
+}
+
 </style>
 
 
