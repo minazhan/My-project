@@ -30,10 +30,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		return org.springframework.security.core.userdetails.User.builder() //使用 email 作為用戶名
 				.username(user.getEmail()) //設置加密的密碼
 				.password(user.getHashedPassword()) //設置用戶角色
-				.roles(user.getRole().startsWith("ROLE_") ? user.getRole().substring(5) : user.getRole()) // 去掉 ROLE_ 前綴
+				.roles(user.getRole().startsWith("ROLE_") ? user.getRole().substring(5) : user.getRole()) //去掉 ROLE_ 前綴
 				.build();
-		
-		
+
 	}
 
 }
