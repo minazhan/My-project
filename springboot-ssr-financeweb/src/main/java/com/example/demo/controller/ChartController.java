@@ -23,7 +23,7 @@ public class ChartController {
 	
 	@GetMapping("/charts")
 	public String dataChartsPage(Model model) {
-		// 獲取職業統計數據
+	//獲取職業統計數據
         Map<String, Long> occupationStats = occupationService.getOccupationStatistics();
         Map<String, Long> riskTypeStatistics = riskTypeService.getRiskTypeStatistics();
         
