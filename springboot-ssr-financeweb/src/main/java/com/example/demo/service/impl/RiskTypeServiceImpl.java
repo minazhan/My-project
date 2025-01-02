@@ -22,11 +22,11 @@ public class RiskTypeServiceImpl implements RiskTypeService{
 		List<Object[]> results = riskTypeRepository.findRiskTypeStatistics();
 		
 		Map<String, Long> riskTypeStatistics = new HashMap<>();
-        for (Object[] result : results) {
-            String riskType = (String) result[0];
-            Long count = (Long) result[1];
-            riskTypeStatistics.put(riskType, count);
-        }
+	        for (Object[] result : results) {
+	            String riskType = (String) result[0];
+	            Long count = (Long) result[1];
+	            riskTypeStatistics.put(riskType, count);
+	        }
 		return riskTypeStatistics;
 	}
 
