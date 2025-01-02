@@ -23,8 +23,8 @@ import jakarta.servlet.http.HttpSession;
 public class AuthenticationFilter implements Filter {
 
 	@Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        // 初始化邏輯，可留空
+    	public void init(FilterConfig filterConfig) throws ServletException {
+        //初始化邏輯，可留空
     }
 
     @Override
@@ -33,8 +33,8 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        // 檢查 Session 是否存在，以及是否有已登入的用戶
-        HttpSession session = httpRequest.getSession(false); // 不自動創建 Session
+        //檢查 Session 是否存在，以及是否有已登入的用戶
+        HttpSession session = httpRequest.getSession(false); //不自動創建 Session
         String path = httpRequest.getRequestURI();
 
         if (session == null || session.getAttribute("role") == null) {
@@ -45,28 +45,28 @@ public class AuthenticationFilter implements Filter {
 
         String userRole = (String) session.getAttribute("role");
 
-        // 定義角色與可訪問路徑的對應關係
+        //定義角色與可訪問路徑的對應關係
         Map<String, List<String>> roleAccessMap = new HashMap<>();
         roleAccessMap.put("ADMIN", Arrays.asList("/admin", "/admin/*"));
         roleAccessMap.put("USER", Arrays.asList("/index.html", "/rest/user", "/rest/transaction", "/api/recommend"));
 
-        // 確認角色是否能訪問當前路徑
+        //確認角色是否能訪問當前路徑
         List<String> accessiblePaths = roleAccessMap.getOrDefault(userRole, Collections.emptyList());
         boolean hasAccess = accessiblePaths.stream().anyMatch(path::startsWith);
 
         if (!hasAccess) {
-            // 如果沒有訪問權限，重定向到默認頁面
+            //如果沒有訪問權限，重定向到默認頁面
             httpResponse.sendRedirect("/");
             return;
         }
 
-        // 如果角色匹配，繼續請求
+        //如果角色匹配，繼續請求
         chain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
-        // 銷毀邏輯，可留空
+        //銷毀邏輯，可留空
     }
 
 }
