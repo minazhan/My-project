@@ -38,15 +38,15 @@ public class OccupationServiceImpl implements OccupationService{
 		
 		//轉成map，轉換後適合傳遞到前端
 		Map<String, Long> occupationStatistics = new HashMap<>();
-        for (Object[] result : results) {
-            String occupationCode = (String) result[0];
-            Long count = (Long) result[1];
-            
-            // 將職業代碼轉換成中文標籤，若沒有對應標籤，預設為 "其他"
-            String occupationLabel = occupationLabels.getOrDefault(occupationCode, "其他");
-            
-            occupationStatistics.put(occupationLabel, count);
-        }
+        	for (Object[] result : results) {
+	            	String occupationCode = (String) result[0];
+	            	Long count = (Long) result[1];
+	            
+		        //將職業代碼轉換成中文標籤，若沒有對應標籤，預設為 "其他"
+		        String occupationLabel = occupationLabels.getOrDefault(occupationCode, "其他");
+		            
+	            	occupationStatistics.put(occupationLabel, count);
+        	}
         return occupationStatistics;
 	}
 
