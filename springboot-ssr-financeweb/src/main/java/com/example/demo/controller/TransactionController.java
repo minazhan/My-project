@@ -18,11 +18,11 @@ import com.example.demo.service.TransactionService;
 import jakarta.validation.Valid;
 
 /**
-請求方法 URL 路徑         						功能說明       請求參數                   回應
------------------------------------------------------------------------------------------------------
-GET    /transaction          		 		取得所有交易資料  無                       成功時返回所有房間的列表及成功訊息。
-POST   /transaction   				 		新增交易資料     請求體包含 transactionDto  成功時返回成功訊息，無回傳資料。
-GET    /transaction/delete/{transactionId}  刪除指定資料     transactionId           成功時返回成功訊息，無回傳資料。
+請求方法 URL 路徑         			功能說明       	請求參數                   回應
+-------------------------------------------------------------------------------------------------------------------------------------------------
+GET    /transaction          		 	取得所有交易資料  無                     成功時返回所有房間的列表及成功訊息。
+POST   /transaction   				 		新增交易資料     	請求體包含 transactionDto  成功時返回成功訊息，無回傳資料。
+GET    /transaction/delete/{transactionId}  	刪除指定資料     transactionId           成功時返回成功訊息，無回傳資料。
 */
 
 
@@ -57,6 +57,5 @@ public class TransactionController {
 		transactionService.deleteTransaction(transactionId);
 		return "redirect:/transaction";
 	}
-	
 
 }
