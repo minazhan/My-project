@@ -29,7 +29,7 @@ public class UserRiskResponseController {
 	private UserRiskResponseService userRiskResponseService;
 	
 	@Autowired
-    private QuestionRepository questionRepository;
+    	private QuestionRepository questionRepository;
 	
 	@Autowired
 	private SurveyService surveyService;
@@ -45,12 +45,11 @@ public class UserRiskResponseController {
 		List<Question> questions = questionRepository.findAll();
 		
 		if (questions.isEmpty()) {
-	        // 如果沒有題目，調用 createQuestionWithOptions 方法
+	        //如果沒有題目，調用 createQuestionWithOptions 方法
 	        surveyService.createQuestionWithOptions();
-	        questions = questionRepository.findAll(); // 重新查詢題目
+	        questions = questionRepository.findAll(); //重新查詢題目
 	    }
 		
-//		questions.forEach(q -> System.out.println("Question ID: " + q.getQuestionId() + ", isMultiSelect: " + q.isMultiSelect()));
 		
 		//在你的 JSP 表單中，這個對象可以用來捕捉用戶的輸入，並在提交表單時被 UserRiskResponseDto 這個類接收
 		model.addAttribute("userRiskResponseDto",userRiskResponseDto);
@@ -60,7 +59,7 @@ public class UserRiskResponseController {
 		return "form";
 	}
 	
-	// 處理表單提交
+	//處理表單提交
 	//@ModelAttribute("userRiskResponseDto") 將表單中的數據與 UserRiskResponseDto 對象進行綁定
 	@PostMapping
 	public String handlePage(@Valid @ModelAttribute("userRiskResponseDto") UserRiskResponseDto userRiskResponseDto,BindingResult bindingResult, Model model) {
@@ -74,6 +73,6 @@ public class UserRiskResponseController {
     	}
 
 		userRiskResponseService.calculateUserRiskResponse(userRiskResponseDto);
-		return "redirect:/login"; // 註冊成功後可以導向登入頁面或其他頁面
+		return "redirect:/login"; //註冊成功後可以導向登入頁面或其他頁面
 	}
 }
