@@ -12,5 +12,4 @@ public interface RecommendationService {
 
 	public List<StockEntity> recommendTop5Products(Integer userId); //根據使用者的風險類型推薦前五筆產品
 	
-	//public List<Map<String, Object>> recommendTop5Products(Integer userId);
 }
