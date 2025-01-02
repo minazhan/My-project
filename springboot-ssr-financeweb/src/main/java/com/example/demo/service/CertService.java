@@ -19,7 +19,7 @@ public class CertService {
 	@Autowired
 	private UserRepository userRepository;//要使用findByEmail方法
 	
-	//private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // BCrypt 編碼器
+	//private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //BCrypt 編碼器
 	
 	public UserCert getCert(String email, String rawPassword){
 		// 1. 查詢是否有此使用者
@@ -66,9 +66,9 @@ public class CertService {
             // 3. 簽發憑證
             UserCert userCert=new UserCert(user.getUserId(), user.getEmail(),user.getFirstName(),user.getRole());
             return userCert;
-        }else {
-            // 找不到使用者時，應該丟出一個例外或者返回 null
-            throw new RuntimeException("找不到使用者，驗證失敗");
-        }	
+        	}else {
+	            // 找不到使用者時，應該丟出一個例外或者返回 null
+	            throw new RuntimeException("找不到使用者，驗證失敗");
+        	}	
 	}
 }
