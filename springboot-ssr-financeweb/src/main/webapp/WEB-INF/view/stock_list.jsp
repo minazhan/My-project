@@ -73,44 +73,44 @@
         }
         
         .back-home {
-		    display: flex;      /* 使用 flex 將圖示與文字排列在同一行 */
-		    align-items: center;
-		    text-decoration: none; /* 移除底線 */
-		    color: #5f6368; /* 文字顏色 */
-		    font-size: 16px; /* 文字大小 */
-		    font-weight: bold; /* 加粗 */
-		}
+	    	display: flex;      /* 使用 flex 將圖示與文字排列在同一行 */
+	 	align-items: center;
+		text-decoration: none; /* 移除底線 */
+		color: #5f6368; /* 文字顏色 */
+		font-size: 16px; /* 文字大小 */
+		font-weight: bold; /* 加粗 */
+	}
 		
-		.back-home svg {
-		    margin-right: 5px; /* SVG 與文字之間的間距 */
-		    height: 24px;
-		    width: 24px;
-		    /*fill: #5f6368;  SVG 顏色 */
-		}
+	.back-home svg {
+		margin-right: 5px; /* SVG 與文字之間的間距 */
+		height: 24px;
+		width: 24px;
+
+	}
 		
-		.back-home:hover {
-		    color: #5a84c3; /* 滑鼠懸停時的文字顏色 */
-		}
+	.back-home:hover {
+		color: #5a84c3; /* 滑鼠懸停時的文字顏色 */
+	}
 		
-		.back-home:hover svg {
-		    fill: #5a84c3; /* 滑鼠懸停時的 SVG 顏色 */
-		}
+	.back-home:hover svg {
+		fill: #5a84c3; /* 滑鼠懸停時的 SVG 顏色 */
+	}
 		
-		.card-body{
-		    background-color: #deeafc;
-            color: #1565c0; /* 深藍字體 */
+	.card-body{
+		background-color: #deeafc;
+            	color: #1565c0; /* 深藍字體 */
     		border: 1px solid #90caf9; /* 藍色邊框 */
-		}
+	}
 		
-		.card-text{
-			color: #0000008c;
-		}
+	.card-text{
+		color: #0000008c;
+	}
 		
-		li{
-		    background-color: #deeafc;
-            color: #0000008c; /* 深藍字體 */
+	li{
+		background-color: #deeafc;
+            	color: #0000008c; /* 深藍字體 */
     		/*border: 1px solid #90caf9;  藍色邊框 */
-		}
+	}
         
     </style>
 </head>
