@@ -126,11 +126,11 @@ p {
 	margin: 0px;
 }
 
-        .brand-logo{
-            width: 150px;
-            height: 60px;
-            object-fit: contain;
-        }
+.brand-logo{
+       width: 150px;
+       height: 60px;
+       object-fit: contain;
+}
 </style>
 
 </head>
