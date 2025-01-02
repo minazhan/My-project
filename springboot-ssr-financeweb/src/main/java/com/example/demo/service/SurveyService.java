@@ -23,133 +23,8 @@ public class SurveyService {
 	@Autowired
 	private QuestionRepository questionRepository; //操作資料庫
 	
-//	@Autowired
-//	private OptionRepository optionRepository; //操作資料庫
-	
 	@Transactional
 	public void createQuestionWithOptions() {
-//		//創建問題和選項(第一題)
-//		Question question1=new Question(); 
-//		question1.setQuestionText("您的年齡是？");
-//		
-//		Option optionA1=new Option();
-//		optionA1.setScore(1);
-//		optionA1.setText("A. 65 歲以上");
-//		
-//		Option optionB1=new Option();
-//		optionB1.setScore(2);
-//		optionB1.setText("B. 56 歲~64 歲");
-//		
-//		Option optionC1=new Option();
-//		optionC1.setScore(3);
-//		optionC1.setText("C. 46 歲~55 歲");
-//		
-//		Option optionD1=new Option();
-//		optionD1.setScore(4);
-//		optionD1.setText("D. 36 歲~45 歲");
-//		
-//		Option optionE1=new Option();
-//		optionE1.setScore(5);
-//		optionE1.setText("E. 19 歲~35 歲");
-//		
-//		Option optionF1=new Option();
-//		optionF1.setScore(5);
-//		optionF1.setText("F. 18 歲以下");
-//		
-//		//將選項加入到問題中
-//		question1.getOptions().add(optionA1);
-//		question1.getOptions().add(optionB1);
-//		question1.getOptions().add(optionC1);
-//		question1.getOptions().add(optionD1);
-//		question1.getOptions().add(optionE1);
-//		question1.getOptions().add(optionF1);
-//		
-//		// 手動維護關聯，告訴每個選項它們是和哪個問題關聯
-////	    for (Option option : question1.getOptions()) {
-////	        optionRepository.save(option);  // 先保存選項，以確保選項有 ID
-////	    }
-//		
-//		//保存問題
-//		questionRepository.save(question1);//自動保存選項並更新中間表
-//		
-//		//創建問題和選項(第二題)
-//		Question question2=new Question(); 
-//		question2.setQuestionText("曾經使用過之投資理財工具種類？");
-//				
-//		Option optionA2=new Option();
-//		optionA2.setScore(1);
-//		optionA2.setText("A. 無");
-//				
-//		Option optionB2=new Option();
-//		optionB2.setScore(2);
-//		optionB2.setText("B. 債券類型基金或保單連結債券");
-//				
-//		Option optionC2=new Option();
-//		optionC2.setScore(3);
-//		optionC2.setText("C. 股票型基金或保單連結股票");
-//				
-//		Option optionD2=new Option();
-//		optionD2.setScore(4);
-//		optionD2.setText("D. 股票");
-//				
-//		Option optionE2=new Option();
-//		optionE2.setScore(4);
-//		optionE2.setText("E. 外匯交易");
-//				
-//		Option optionF2=new Option();
-//		optionF2.setScore(5);
-//		optionF2.setText("F. 期貨、選擇權等衍生性金融商品");
-//				
-//		//將選項加入到問題中
-//		question2.getOptions().add(optionA2);
-//		question2.getOptions().add(optionB2);
-//		question2.getOptions().add(optionC2);
-//		question2.getOptions().add(optionD2);
-//		question2.getOptions().add(optionE2);
-//		question2.getOptions().add(optionF2);
-//				
-//		//保存問題
-//		questionRepository.save(question2);//自動保存選項並更新中間表
-//		
-//		
-//		//創建問題和選項(第三題)
-//		Question question3=new Question(); 
-//		question3.setQuestionText("曾經使用過之投資理財工具種類？");
-//				
-//		Option optionA3=new Option();
-//		optionA3.setScore(1);
-//		optionA3.setText("A. a");
-//				
-//		Option optionB3=new Option();
-//		optionB3.setScore(2);
-//		optionB3.setText("B. b");
-//				
-//		Option optionC3=new Option();
-//		optionC3.setScore(3);
-//		optionC3.setText("C. c");
-//				
-//		Option optionD3=new Option();
-//		optionD3.setScore(4);
-//		optionD3.setText("D. d");
-//				
-//		Option optionE3=new Option();
-//		optionE3.setScore(4);
-//		optionE3.setText("E. e");
-//				
-//		Option optionF3=new Option();
-//		optionF3.setScore(5);
-//		optionF3.setText("F. f");
-//				
-//		//將選項加入到問題中
-//		question3.getOptions().add(optionA3);
-//		question3.getOptions().add(optionB3);
-//		question3.getOptions().add(optionC3);
-//		question3.getOptions().add(optionD3);
-//		question3.getOptions().add(optionE3);
-//		question3.getOptions().add(optionF3);
-//				
-//		//保存問題
-//		questionRepository.save(question3);//自動保存選項並更新中間表	
 		
 		//準備問題和選項資料結構
 		Map<String, List<String>> questionData = new LinkedHashMap<>();
@@ -262,39 +137,38 @@ public class SurveyService {
 				"F. 持有至回本"
 		));	
 		
-        // 遍歷每個問題並創建 Question 和 Option
-		int questionIndex = 1; // 用於計算哪一題是多選
+        //遍歷每個問題並創建 Question 和 Option
+	int questionIndex = 1; // 用於計算哪一題是多選
         for (Map.Entry<String, List<String>> entry : questionData.entrySet()) {
-            // 創建問題
+            //創建問題
             Question question = new Question();
             question.setQuestionText(entry.getKey());
 
-            // 決定是否為多選題
-            // 在這裡我們將第二題（index 為 2）設為多選題
+            //決定是否為多選題
+            //在這裡我們將第二題（index 為 2）設為多選題
             if (questionIndex == 2) {
-                question.setMultiSelect(true); // 第二題設為多選
+                question.setMultiSelect(true); //第二題設為多選
             } else {
-                question.setMultiSelect(false); // 其他題目設為單選
+                question.setMultiSelect(false); //其他題目設為單選
             }
             
-            // 創建選項並加入問題
+            //創建選項並加入問題
             List<Option> options = new ArrayList<>();
-            int score = 1; // 假設每個選項的分數按順序增加
+            int score = 1; //假設每個選項的分數按順序增加
             for (String optionText : entry.getValue()) {
                 Option option = new Option();
                 option.setText(optionText);
-                option.setScore(score++); // 每個選項的分數遞增
+                option.setScore(score++); //每個選項的分數遞增
                 options.add(option);
             }
 
-            // 將選項加入問題
+            //將選項加入問題
             question.setOptions(options);
 
-            // 保存問題，JPA 會自動保存選項及更新中間表
+            //保存問題，JPA 會自動保存選項及更新中間表
             questionRepository.save(question);
             
             questionIndex++;//將題目編號增加
         }
 	}
-
 }
