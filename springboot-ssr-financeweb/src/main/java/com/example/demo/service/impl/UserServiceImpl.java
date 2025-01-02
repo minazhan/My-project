@@ -66,10 +66,6 @@ public class UserServiceImpl implements UserService{
 		
 		User user = userMapper.toEntity(userDto);
 		userRepository.save(user);
-		
-		//丟出UserException???
-		
-		
 	}
 
 	@Override
@@ -84,75 +80,54 @@ public class UserServiceImpl implements UserService{
 		User user = optUser.get();
 		
 		//dto映射到entity
-	    if (userDto.getFirstName() != null) {
-	        user.setFirstName(userDto.getFirstName());
-	    }
-	    if (userDto.getLastName() != null) {
-	        user.setLastName(userDto.getLastName());
-	    }
-	    if (userDto.getGender() != null) {
-	        user.setGender(userDto.getGender());
-	    }
-	    if (userDto.getOccupation() != null) {
-	        user.setOccupation(userDto.getOccupation());
-	    }
-	    if (userDto.getEmail() != null) {
-	        user.setEmail(userDto.getEmail());
-	    }
-		//user.setUserId(userId);
-		
-		//userDto.setUserId(userId);
-		//User user = userMapper.toEntity(userDto);
-		userRepository.save(user);
-		
-		//丟出UserException???
-		
-		
+		    if (userDto.getFirstName() != null) {
+		        user.setFirstName(userDto.getFirstName());
+		    }
+		    if (userDto.getLastName() != null) {
+		        user.setLastName(userDto.getLastName());
+		    }
+		    if (userDto.getGender() != null) {
+		        user.setGender(userDto.getGender());
+		    }
+		    if (userDto.getOccupation() != null) {
+		        user.setOccupation(userDto.getOccupation());
+		    }
+		    if (userDto.getEmail() != null) {
+		        user.setEmail(userDto.getEmail());
+		    }
+			//user.setUserId(userId);
+			
+			//userDto.setUserId(userId);
+			//User user = userMapper.toEntity(userDto);
+			userRepository.save(user);
 	}
 
 	@Override
 	public void deleteUser(Integer userId) {
-		/*
-		//要判斷使用者是否存在
-		User user = userRepository.findById(userId)
-				.orElseThrow( () -> new UserNotFoundException("找不到使用者: userId:"+userId) );
-		userRepository.deleteById(userId);
-		*/
-		
 		//另一種
 		Optional<User> user = userRepository.findById(userId);
 		if (user.isEmpty()) {
 			throw new UserNotFoundException("刪除失敗: " + userId + " 不存在");
 		}
-		userRepository.deleteById(userId);
-		
-		//丟出UserException???
-		
-		
+		userRepository.deleteById(userId);	
 	}
 
 	@Override
 	public User addRegistrationUser(UserRegistrationDto userRegistrationDto) {
-	    // 使用 BCryptPasswordEncoder 進行加密
-	    String rawPassword = userRegistrationDto.getHashedPassword(); // 從 DTO 獲取原始密碼
-	    String hashedPassword = PasswordUtil.encodePassword(rawPassword);  // 使用 BCrypt 進行加密
+	    //使用 BCryptPasswordEncoder 進行加密
+	    String rawPassword = userRegistrationDto.getHashedPassword(); //從 DTO 獲取原始密碼
+	    String hashedPassword = PasswordUtil.encodePassword(rawPassword);  //使用 BCrypt 進行加密
 
-	    // 使用 DTO 資料來建立 User 實體物件
+	    //使用 DTO 資料來建立 User 實體物件
 	    User user = userRegistrationMapper.toEntity(userRegistrationDto);
 
-	    // 設置加密後的密碼到 User 實體中
+	    //設置加密後的密碼到 User 實體中
 	    user.setHashedPassword(hashedPassword);
 
-	    // 將使用者資料存入資料庫
+	    //將使用者資料存入資料庫
 	    userRepository.save(user);
 
-	    // 返回保存後的 User 對象
+	    //返回保存後的 User 對象
 	    return user;
-
-				
-		//丟出UserException???
-				
-		
 	}
-
 }
